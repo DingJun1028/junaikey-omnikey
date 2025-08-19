@@ -1,0 +1,28 @@
+name: AI PR Progress Tracker
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, labeled, unlabeled, ready_for_review]
+  check_suite:
+    types: [completed]
+  workflow_run:
+    workflows: ["JunAiKey CI/CD", "Commitlint", "Deploy Firebase Functions"]
+    types: [completed]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  track_progress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Update Progress Comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .github/scripts/progress_tracker.mjs

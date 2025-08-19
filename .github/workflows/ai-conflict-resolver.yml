@@ -1,0 +1,98 @@
+name: AI Conflict Resolver
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to attempt auto-rebase/resolve'
+        required: true
+  pull_request_target:
+    types: [synchronize, labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto_rebase_and_resolve:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request_target' &&
+       (github.event.action == 'labeled' || github.event.action == 'synchronize') &&
+       contains(github.event.pull_request.labels.*.name, 'conflict:auto-fix'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve PR metadata
+        id: meta
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.eventName === 'workflow_dispatch'
+              ? parseInt(core.getInput('pr_number'), 10)
+              : context.payload.pull_request.number;
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+            core.setOutput('pr_number', prNumber.toString());
+            core.setOutput('head_ref', pr.head.ref);
+            core.setOutput('head_repo', pr.head.repo.full_name);
+            core.setOutput('mergeable_state', pr.mergeable_state || '');
+            core.setOutput('head_is_same_repo', (pr.head.repo.full_name === `${context.repo.owner}/${context.repo.repo}`).toString());
+
+      - name: Checkout PR branch
+        if: ${{ steps.meta.outputs.head_is_same_repo == 'true' }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.meta.outputs.head_ref }}
+          fetch-depth: 0
+
+      - name: Attempt rebase onto main
+        if: ${{ steps.meta.outputs.head_is_same_repo == 'true' }}
+        shell: bash
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          if ! git rebase origin/main; then
+            echo "Rebase conflicts detected. Trying heuristic fixes..."
+            # Heuristic: lockfiles
+            if [ -f package-lock.json ]; then npm i --package-lock-only || true; fi
+            if command -v yarn >/dev/null 2>&1 && [ -f yarn.lock ]; then yarn install --mode=update-lockfile || true; fi
+            if command -v pnpm >/dev/null 2>&1 && [ -f pnpm-lock.yaml ]; then pnpm install --lockfile-only || true; fi
+            # Heuristic: formatting
+            if npm run -s format >/dev/null 2>&1; then echo "Ran formatter"; fi
+            git add -A || true
+            git rebase --continue || true
+          fi
+          git push --force-with-lease
+
+      - name: Comment result
+        uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ steps.meta.outputs.pr_number }}
+        with:
+          script: |
+            const prNumber = parseInt(process.env.PR_NUMBER, 10);
+            const body = `
+            <!-- ai-conflict:begin -->
+            AI Conflict Resolver 嘗試完成：
+            - Rebase: 已嘗試將分支 rebase 到 main
+            - 自動修復：鎖檔/格式化/最小化變更
+            若仍有衝突，請在本機完成並推送；或重跑此 Workflow。
+            <!-- ai-conflict:end -->
+            `;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              per_page: 100
+            });
+            const prev = comments.find(c => c.body && c.body.includes('<!-- ai-conflict:begin -->'));
+            if (prev) {
+              await github.rest.issues.updateComment({ owner: context.repo.owner, repo: context.repo.repo, comment_id: prev.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: prNumber, body });
+            }

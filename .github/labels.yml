@@ -1,0 +1,21 @@
+- name: ai
+  color: 5319e7
+  description: AI-generated or AI-assisted
+- name: automerge-candidate
+  color: 0e8a16
+  description: Eligible for auto-merge once checks pass
+- name: rebase:bot
+  color: 1d76db
+  description: Auto-rebase by bot
+- name: conflict:auto-fix
+  color: d73a4a
+  description: Try auto conflict resolution
+- name: merge:squash
+  color: c5def5
+  description: "Recommended merge method: squash"
+- name: merge:rebase
+  color: c2e0c6
+  description: "Recommended merge method: rebase"
+- name: merge:merge
+  color: fef2c0
+  description: "Recommended merge method: merge commit"
