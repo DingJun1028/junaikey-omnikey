@@ -1,0 +1,6 @@
+技術維度,Google Jules（AI代理）,手機端IDE（如Spck Editor）
+主要工作模式,非同步、平行執行,同步、線性操作
+Git操作能力,PR 驅動可處理複雜任務（含 rebase）,功能基礎 難以處理複雜衝突
+環境存取,雲端 VM 可多步驟任務,受限於手機 OS 無終端機
+衝突解決能力,PR 前自動 rebase,缺乏 rebase/pull 能力
+工作流,PR 與 CI/CD 無縫整合,手動 push/pull 易遇 non-fast-forward

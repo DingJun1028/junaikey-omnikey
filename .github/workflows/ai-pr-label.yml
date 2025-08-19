@@ -1,0 +1,23 @@
+name: AI PR Labeler
+
+on:
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label AI PRs and enable automerge gate
+        if: ${{ github.actor == vars.JULES_LOGIN || startsWith(github.head_ref, 'ai/') }}
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            ai
+            rebase:bot
+            automerge-candidate

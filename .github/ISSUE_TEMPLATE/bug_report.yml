@@ -1,0 +1,16 @@
+name: Bug Report
+description: 回報一個錯誤
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 描述
+      description: 清楚描述問題與重現步驟
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日誌/截圖
+      description: 附上錯誤訊息/截圖
