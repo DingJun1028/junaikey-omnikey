@@ -1,0 +1,99 @@
+name: JunAiKey CI/CD
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Unit Tests
+        run: npm test --if-present -- --ci --reporters=default
+
+  hosting_preview:
+    needs: build_and_test
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Firebase CLI
+        run: npm i -g firebase-tools
+
+      - name: Deploy Firebase Hosting Preview (staging)
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STAGING }}
+          PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID_STAGING }}
+        run: |
+          echo "$FIREBASE_SERVICE_ACCOUNT" > ${HOME}/gcp_key.json
+          export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/gcp_key.json
+          CHANNEL_ID=pr-${{ github.event.number }}
+          firebase hosting:channel:deploy "$CHANNEL_ID" --project "$PROJECT_ID" --json > preview.json
+          echo "PREVIEW_JSON<<EOF" >> $GITHUB_ENV
+          cat preview.json >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+  notify_slack:
+    needs: [ build_and_test, hosting_preview ]
+    if: always() && github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract Preview URL
+        id: preview
+        run: |
+          if [ -n "${{ needs.hosting_preview.result }}" ] && [ "${{ needs.hosting_preview.result }}" != "skipped" ]; then
+            URL=$(cat $GITHUB_ENV | sed -n '/^PREVIEW_JSON<<EOF$/,/^EOF$/p' | sed '1d;$d' | jq -r '.result[]?.details?.url // empty' | head -n1)
+            echo "url=$URL" >> $GITHUB_OUTPUT
+          else
+            echo "url=" >> $GITHUB_OUTPUT
+          fi
+      - name: Send Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: '#project-jun-ai-key'
+          SLACK_USERNAME: 'CI-CD Bot'
+          SLACK_COLOR: ${{ needs.build_and_test.result == 'success' && 'good' || 'danger' }}
+          SLACK_TITLE: 'PR #${{ github.event.pull_request.number }} - ${{ github.event.pull_request.title }}'
+          SLACK_MESSAGE: |
+            CI: ${{ needs.build_and_test.result }}
+            Preview: ${{ steps.preview.outputs.url }}
+
+  deploy_prod:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Firebase CLI
+        run: npm i -g firebase-tools
+      - name: Deploy to Production Hosting
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
+          PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID_PROD }}
+        run: |
+          echo "$FIREBASE_SERVICE_ACCOUNT" > ${HOME}/gcp_key.json
+          export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/gcp_key.json
+          firebase deploy --only hosting --project "$PROJECT_ID"

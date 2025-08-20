@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "dev": "jun-ai-key-dev",
+    "staging": "jun-ai-key-staging",
+    "prod": "jun-ai-key-prod"
+  }
+}

@@ -1,0 +1,4 @@
+環境名稱,對應Firebase專案ID,主要用途,資料特性,安全等級與存取
+開發(dev),jun-ai-key-dev,日常開發/模擬器,模擬或虛擬資料,較低（廣泛存取）
+暫存(staging),jun-ai-key-staging,整合/QA/PR預覽,匿名化代表性資料,中（團隊可測）
+正式(prod),jun-ai-key-prod,正式營運,真實用戶數據,高（嚴格權限）

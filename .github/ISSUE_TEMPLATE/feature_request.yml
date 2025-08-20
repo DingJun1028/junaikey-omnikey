@@ -1,0 +1,15 @@
+name: Feature Request
+description: 提出新功能或改善
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 背景/問題
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 提案
+      description: 說明預期行為、成功條件與可能影響
