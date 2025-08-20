@@ -1,0 +1,24 @@
+- name: ai
+  color: "8A2BE2"
+  description: "AI-generated or AI-managed context"
+- name: automerge-candidate
+  color: "0E8A16"
+  description: "Eligible for auto-merge when checks and reviews pass"
+- name: conflict:auto-fix
+  color: "B60205"
+  description: "Try automated conflict resolution (same-repo branches only)"
+- name: merge:squash
+  color: "1D76DB"
+  description: "Merge method suggestion: SQUASH"
+- name: merge:rebase
+  color: "1D76DB"
+  description: "Merge method suggestion: REBASE"
+- name: merge:merge
+  color: "1D76DB"
+  description: "Merge method suggestion: MERGE"
+- name: status:ai-review
+  color: "5319E7"
+  description: "AI review status and notes"
+- name: status:ai-progress
+  color: "5319E7"
+  description: "AI progress tracker status"

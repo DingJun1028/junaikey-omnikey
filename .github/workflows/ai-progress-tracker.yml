@@ -1,0 +1,20 @@
+name: AI PR Progress Tracker
+on:
+  pull_request:
+    types: [ opened, synchronize, edited, reopened, labeled, unlabeled, ready_for_review ]
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  statuses: read
+jobs:
+  progress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Update AI Progress Comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .github/scripts/progress_tracker.mjs

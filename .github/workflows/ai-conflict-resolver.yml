@@ -1,0 +1,90 @@
+name: AI Conflict Resolver
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'Pull request number'
+        required: true
+  pull_request_target:
+    types: [ labeled ]
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  maybe-resolve:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request_target' && github.event.label.name == 'conflict:auto-fix')
+    steps:
+      - name: Resolve for workflow_dispatch - read PR info
+        id: prinfo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_INPUT: ${{ github.event.inputs.pr }}
+        run: |
+          if [ -n "$PR_INPUT" ]; then
+            PR_NUM=$PR_INPUT
+          else
+            PR_NUM=${{ github.event.pull_request.number }}
+          fi
+          echo "pr=$PR_NUM" >> $GITHUB_OUTPUT
+      - name: Fetch PR metadata
+        id: meta
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUM: ${{ steps.prinfo.outputs.pr }}
+        run: |
+          curl -sSL -H "authorization: Bearer $GITHUB_TOKEN" \
+            "${{ github.api_url }}/repos/${{ github.repository }}/pulls/$PR_NUM" > pr.json
+          cat pr.json
+          echo "head_repo=$(jq -r .head.repo.full_name pr.json)" >> $GITHUB_OUTPUT
+          echo "head_ref=$(jq -r .head.ref pr.json)" >> $GITHUB_OUTPUT
+          echo "base_ref=$(jq -r .base.ref pr.json)" >> $GITHUB_OUTPUT
+          REPO_FULL_NAME=$(jq -r .head.repo.full_name pr.json)
+          if [ "$REPO_FULL_NAME" = "${{ github.repository }}" ]; then
+            echo "is_same=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_same=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Guard - same-repo only
+        if: ${{ steps.meta.outputs.is_same != 'true' }}
+        run: echo "Skipping - conflict auto-fix only allowed for same-repo branches" && exit 0
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.meta.outputs.head_ref }}
+          fetch-depth: 0
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Rebase onto base
+        env:
+          BASE_REF: ${{ steps.meta.outputs.base_ref }}
+        run: |
+          git fetch origin $BASE_REF
+          set +e
+          git rebase origin/$BASE_REF
+          RB=$?
+          set -e
+          if [ $RB -ne 0 ]; then
+            echo "Rebase conflicts detected. Trying heuristics..."
+            for f in yarn.lock package-lock.json pnpm-lock.yaml bun.lockb Cargo.lock; do
+              if git ls-files --unmerged -- "$f" >/dev/null 2>&1; then
+                echo "Resolving lockfile $f by keeping ours"
+                git checkout --ours -- "$f" || true
+                git add "$f" || true
+              fi
+            done
+            set +e
+            git rebase --continue
+            RC=$?
+            set -e
+            if [ $RC -ne 0 ]; then
+              echo "Heuristic rebase failed. Aborting..."
+              git rebase --abort || true
+              echo "::notice::Conflict resolver could not auto-fix. Please resolve manually."
+              exit 0
+            fi
+          fi
+      - name: Push updated branch (force-with-lease)
+        run: |
+          git push --force-with-lease

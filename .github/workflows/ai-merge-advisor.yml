@@ -1,0 +1,21 @@
+name: AI Merge Advisor
+on:
+  pull_request_target:
+    types: [ opened, synchronize, edited, reopened, ready_for_review ]
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  checks: read
+  statuses: read
+jobs:
+  advise:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run Merge Advisor
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .github/scripts/merge_advisor.mjs
