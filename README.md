@@ -1,2 +1,0 @@
-# junaikey-omnikey
-junaikey-omnikey

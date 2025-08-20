@@ -1,27 +1,37 @@
 {
-  "name": "nextn",
-  "version": "0.1.0",
-  "private": true,
+  "name": "junaikey-omnikey",
+  "version": "1.0.0",
+  "description": "",
+  "main": "postcss.config.js",
   "scripts": {
-    "dev": "next dev -p 9002",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DingJun1028/junaikey-omnikey.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DingJun1028/junaikey-omnikey/issues"
+  },
+  "homepage": "https://github.com/DingJun1028/junaikey-omnikey#readme",
   "dependencies": {
-    "next": "14.2.3",
-    "react": "^18",
-    "react-dom": "^18",
-    "firebase": "^10.12.2"
+    "autoprefixer": "^10.4.21",
+    "firebase": "^12.1.0",
+    "next": "^15.5.0",
+    "node-fetch": "^3.3.2",
+    "postcss": "^8.5.6",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tailwindcss": "^4.1.12"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.3"
+    "@types/node": "24.3.0",
+    "@types/react": "19.1.10",
+    "typescript": "5.9.2"
   }
 }
