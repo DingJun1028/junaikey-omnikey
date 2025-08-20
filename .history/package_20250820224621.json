@@ -1,0 +1,35 @@
+{
+  "name": "junaikey-omnikey",
+  "version": "1.0.0",
+  "description": "",
+  "main": "postcss.config.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DingJun1028/junaikey-omnikey.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DingJun1028/junaikey-omnikey/issues"
+  },
+  "homepage": "https://github.com/DingJun1028/junaikey-omnikey#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.21",
+    "next": "^15.5.0",
+    "postcss": "^8.5.6",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tailwindcss": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.0",
+    "@types/react": "19.1.10",
+    "typescript": "5.9.2"
+  }
+}
