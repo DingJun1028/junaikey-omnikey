@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@genkit-ai/ai": "^1.18.0",
+    "@google/generative-ai": "^0.24.1",
     "firebase": "^10.14.1",
     "next": "14.2.3",
     "react": "^18",
