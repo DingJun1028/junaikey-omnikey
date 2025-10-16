@@ -1,4 +1,7 @@
 {
 <<<<<<< HEAD
   "extends": "next/core-web-vitals"
+=======
+  "extends": "next"
+>>>>>>> origin/copilot/fix-9232c19d-160a-4dfd-ae6f-6f9f20259581
 }
