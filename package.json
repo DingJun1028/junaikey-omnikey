@@ -21,7 +21,7 @@
   "homepage": "https://github.com/DingJun1028/junaikey-omnikey#readme",
   "dependencies": {
     "autoprefixer": "^10.4.21",
-    "firebase": "^12.1.0",
+    "firebase": "^12.7.0",
     "next": "^15.5.0",
     "node-fetch": "^3.3.2",
     "postcss": "^8.5.6",
