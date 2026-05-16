@@ -7,6 +7,7 @@ import {
 } from '../../src/omni/shared/types';
 import { hermes } from '../../src/app/hermesAgent';
 import { boostBody } from '../../src/app/boostspaceAdapter';
+import { ares } from '../../src/app/aresAgent';
 
 /**
  * 🌌 OmniCore Backend Service
@@ -23,11 +24,16 @@ export class OmniCoreService {
         }
 
         // 2. Body Execution Track (BoostSpace)
-        if (request.type === 'command' || request.content.toLowerCase().includes('execute')) {
+        if (request.type === 'command' && request.content.toLowerCase().includes('execute')) {
             return await boostBody.execute(request);
         }
 
-        // 3. Standard 5T Logic Gate Implementation
+        // 3. Guardian Security Track (Ares)
+        if (request.content.toLowerCase().includes('audit') || request.content.toLowerCase().includes('secure')) {
+            return await ares.audit(request);
+        }
+
+        // 4. Standard 5T Logic Gate Implementation
         const evidence: IEvidence = {
             tangible_metric: `Audit_${request.type}_v4`,
             source_origin: `OmniCore_Request_${request.id}`,
