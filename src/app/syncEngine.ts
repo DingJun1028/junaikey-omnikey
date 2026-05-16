@@ -68,8 +68,8 @@ export function useSyncEngine(
       b => !(platformData.aitable || []).some(a => a.id === b.id)
     );
     if (newTasksForAitable.length > 0) {
-      const { AitableClient } = await import("./aitApiClient");
-      const aitableClient = new AitableClient("Tasks");
+      const { AITableService } = await import("./AITableService");
+      const aitableClient = new AITableService("Tasks");
       try {
         await aitableClient.createRecords(newTasksForAitable.map(item => ({ fields: item })));
         onSyncLog(`✅ 同步到 Aitable 成功`);

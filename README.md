@@ -40,9 +40,16 @@ ESGss JunAiKey Beta 是一個結合王道經營哲學與頂尖 AI 技術的自�
 
 ## 🚀 快速開始 (Quick Start)
 
-### 1. 安裝環境
+### 1. 環境需求 (Prerequisites)
+*   **Node.js**: 22.0.0 或更高版本
+*   **Package Manager**: `pnpm` (建議使用)
+*   **Git**: 用於版本控制
+*   **tmux**: 用於持久化 TUI 後端工作進程
+*   **Hermes Profile**: 需於 `~/.hermes/profiles/` 下配置有效的 Agent 配置文件
+
+### 2. 安裝環境
 ```bash
-npm install
+pnpm install
 ```
 
 ### 2. 環境變數配置

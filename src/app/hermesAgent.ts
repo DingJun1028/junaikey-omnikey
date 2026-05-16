@@ -16,9 +16,11 @@ import { OpenCodeClient } from './clients/opencodeClient';
 export class HermesAgent {
     private client: OpenCodeClient;
     private static model = "NousResearch/Hermes-3-Llama-3.1-8B";
+    private profilePath: string = "~/.hermes/profiles/";
 
     constructor() {
         this.client = new OpenCodeClient();
+        console.log(`🕊️ Hermes Agent initialized with profile context: ${this.profilePath}`);
     }
 
     /**
