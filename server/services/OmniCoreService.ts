@@ -5,6 +5,7 @@ import {
     IComponentCore,
     IEvidence
 } from '../../src/omni/shared/types';
+import { hermes } from '../../src/app/hermesAgent';
 
 /**
  * 🌌 OmniCore Backend Service
@@ -15,7 +16,12 @@ export class OmniCoreService {
         const start = Date.now();
         console.log(`🌌 Processing OmniCore Request: ${request.id} [${request.type}]`);
 
-        // 1. 5T Logic Gate Implementation (Simulation)
+        // Fast Track for Coordination/Sync tasks via Hermes
+        if (request.type === 'command' || request.content.toLowerCase().includes('sync')) {
+            return await hermes.dispatch(request);
+        }
+
+        // Standard 5T Logic Gate Implementation
         const evidence: IEvidence = {
             tangible_metric: `Audit_${request.type}_v4`,
             source_origin: `OmniCore_Request_${request.id}`,
