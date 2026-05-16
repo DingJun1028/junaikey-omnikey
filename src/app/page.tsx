@@ -288,30 +288,68 @@ export default function Home() {
            <div className="absolute bottom-0 left-0 h-1.5 bg-wangdao-red transition-all duration-1000 ease-out" style={{ width: `${((carouselIndex + 1) / qnaItems.length) * 100}%` }}></div>
         </section>
 
-        {/* SECTION 8: AI Zone */}
+        {/* SECTION 8: AI Zone & 5T Governance */}
         <section id="ai" className="py-48 bg-white relative overflow-hidden">
-           <div className="max-w-7xl mx-auto px-12 grid lg:grid-cols-2 gap-40 items-center relative z-10">
+           <div className="max-w-7xl mx-auto px-12 grid lg:grid-cols-2 gap-20 items-center relative z-10">
               <div className="reveal-on-scroll">
-                 <div className="inline-block px-5 py-1.5 bg-blue-50 text-blue-600 text-[11px] font-bold tracking-[0.5em] uppercase mb-12 rounded-full">Future Intelligence</div>
-                 <h2 className="font-serif text-6xl md:text-[7rem] text-primary mb-12 leading-[0.8] tracking-tighter">AI 阿丹<br/><span className="text-slate-200">智慧思想分身</span></h2>
-                 <p className="text-xl text-slate-500 font-light leading-relaxed mb-20 italic max-w-lg">開發中的王道智慧引擎。未來將協助領導者在瞬息萬變的局勢中，進行精準的價值平衡分析與決策模擬。</p>
-                 <div className="grid grid-cols-2 gap-x-12 gap-y-8">
+                 <div className="inline-block px-5 py-1.5 bg-blue-50 text-blue-600 text-[11px] font-bold tracking-[0.5em] uppercase mb-12 rounded-full">Future Intelligence & 5T Trust</div>
+                 <h2 className="font-serif text-6xl md:text-[7rem] text-primary mb-12 leading-[0.8] tracking-tighter">AI 治理<br/><span className="text-slate-200">雙核心引擎</span></h2>
+                 <p className="text-xl text-slate-500 font-light leading-relaxed mb-16 italic max-w-lg">
+                    王道智慧引擎「阿丹」具備雙核心設計。透過 5T 數據信託架構，我們確保了決策的透明度與可追溯性，平衡封閉強模型與開源透明的優勢。
+                 </p>
+                 <div className="grid grid-cols-2 gap-x-8 gap-y-6">
                     {['文化智囊', '價值診斷', '平衡預測', '轉譯引擎'].map(f => (
-                      <div key={f} className="flex items-center gap-6 text-[12px] font-bold uppercase tracking-widest text-primary border-b border-outline-variant pb-6 hover:text-wangdao-red hover:border-wangdao-red cursor-help transition-all">
+                      <div key={f} className="flex items-center gap-4 text-[11px] font-bold uppercase tracking-widest text-primary border-b border-outline-variant pb-4 hover:text-wangdao-red hover:border-wangdao-red cursor-help transition-all">
                         <div className="w-1.5 h-1.5 bg-classic-gold rounded-full group-hover:scale-150 transition-transform"></div> {f}
                       </div>
                     ))}
                  </div>
               </div>
-              <div className="flex justify-center relative scale-110">
-                 <div className="w-[30rem] h-[30rem] border border-outline-variant rounded-full flex items-center justify-center animate-[spin_100s_linear_infinite] opacity-30">
-                    <div className="w-4 h-4 bg-wangdao-red rounded-full absolute top-0 shadow-lg shadow-wangdao-red/50"></div>
-                    <div className="w-3 h-3 bg-classic-gold rounded-full absolute bottom-20 left-20"></div>
+              
+              {/* 5T Trust Dashboard */}
+              <div className="bg-surface border border-outline-variant shadow-2xl p-10 flex flex-col gap-8 relative">
+                 <div className="absolute top-0 right-0 w-32 h-32 bg-wangdao-red/5 blur-3xl rounded-full"></div>
+                 <h3 className="font-serif text-2xl text-primary flex items-center justify-between border-b border-outline-variant pb-6">
+                    <span>5T 信任中心面板</span>
+                    <span className="text-[9px] uppercase tracking-[0.3em] bg-green-100 text-green-700 px-3 py-1 rounded-full animate-pulse">Live Sync Active</span>
+                 </h3>
+                 
+                 <div className="space-y-6">
+                    {/* Gemini / Straico Core */}
+                    <div className="p-6 bg-white border border-outline-variant hover:border-blue-200 transition-colors group">
+                       <div className="flex justify-between items-start mb-4">
+                          <div>
+                             <div className="text-[10px] text-blue-500 font-bold tracking-widest uppercase mb-1">Primary Engine</div>
+                             <div className="font-serif text-xl text-primary group-hover:text-blue-600 transition-colors">Gemini 2.0 Flash</div>
+                          </div>
+                          <div className="text-[9px] text-slate-400 bg-slate-50 px-2 py-1 uppercase tracking-wider">via Straico Agent</div>
+                       </div>
+                       <div className="flex justify-between text-xs text-slate-500">
+                          <span>Sigil Status: <span className="text-green-600 font-bold">Secured</span></span>
+                          <span>Tangibility: <span className="text-primary font-bold">High</span></span>
+                       </div>
+                    </div>
+
+                    {/* OpenCode Core */}
+                    <div className="p-6 bg-white border border-outline-variant hover:border-classic-gold/50 transition-colors group">
+                       <div className="flex justify-between items-start mb-4">
+                          <div>
+                             <div className="text-[10px] text-classic-gold font-bold tracking-widest uppercase mb-1">Transparency Engine</div>
+                             <div className="font-serif text-xl text-primary group-hover:text-classic-gold transition-colors">Kimi K2.5 (Open Weights)</div>
+                          </div>
+                          <div className="text-[9px] text-slate-400 bg-slate-50 px-2 py-1 uppercase tracking-wider">via OpenCode API</div>
+                       </div>
+                       <div className="flex justify-between text-xs text-slate-500">
+                          <span>Hash Lock: <span className="text-green-600 font-bold">Verified</span></span>
+                          <span>Transparency: <span className="text-primary font-bold">Maximum</span></span>
+                       </div>
+                    </div>
                  </div>
-                 <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[10rem] grayscale opacity-40 animate-float">🤖</div>
+
+                 <div className="mt-4 pt-6 border-t border-outline-variant flex justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                    <span>Last Audit: Just now</span>
+                    <button className="text-wangdao-red hover:underline">View OmniLog</button>
                  </div>
-                 <div className="absolute w-[20rem] h-[20rem] border border-blue-50 rounded-full animate-pulse"></div>
               </div>
            </div>
         </section>
