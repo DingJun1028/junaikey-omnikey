@@ -9,6 +9,7 @@ import {
   Search, Box, Clock, BarChart3
 } from 'lucide-react';
 import OmniCoreChat from './components/OmniCoreChat';
+import ESGHealthCheck from './components/ESGHealthCheck';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -484,6 +485,22 @@ export default function Home() {
           content: '王';
           position: absolute;
           font-family: 'Newsreader', serif;
+          font-size: 60vw;
+          color: #000;
+          opacity: 0.015;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          pointer-events: none;
+          z-index: 0;
+        }
+        
+        html { scroll-behavior: smooth; }
+      `}</style>
+    </div>
+  );
+}
+font-family: 'Newsreader', serif;
           font-size: 60vw;
           color: #000;
           opacity: 0.015;
