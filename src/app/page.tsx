@@ -8,6 +8,7 @@ import {
   PlayCircle, BookOpen, Lightbulb, Scale, Sprout,
   Search, Box, Clock, BarChart3
 } from 'lucide-react';
+import OmniCoreChat from './components/OmniCoreChat';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -93,7 +94,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 h-full flex justify-between items-center">
           <div className="flex items-center gap-4 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
             <div className="w-10 h-10 bg-wangdao-red rounded-full flex items-center justify-center text-white font-serif text-xl shadow-lg transition-all group-hover:scale-110">王</div>
-            <span className="text-xl md:text-2xl font-display-calligraphy text-primary tracking-tighter">王道經營學堂</span>
+            <div className="flex flex-col">
+              <span className="text-xl md:text-2xl font-display-calligraphy text-primary tracking-tighter">王道經營學堂</span>
+              <div className="hidden md:flex items-center gap-2 mt-0.5">
+                <span className="w-1 h-1 bg-green-500 rounded-full animate-pulse"></span>
+                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.2em]">5T Data Trust: Synchronized</span>
+              </div>
+            </div>
           </div>
           
           <nav className="hidden lg:flex gap-10 items-center">
@@ -452,50 +459,8 @@ export default function Home() {
         </button>
       </div>
 
-      {/* AI Adan Modal */}
-      <AnimatePresence>
-        {isAiOpen && (
-          <motion.div initial={{ opacity: 0, y: 30, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 30, scale: 0.9 }} className="fixed bottom-36 right-12 z-[160] w-[450px] bg-white border border-outline-variant shadow-2xl flex flex-col overflow-hidden">
-             <div className="bg-primary p-8 text-white flex justify-between items-center">
-                <div className="flex items-center gap-5">
-                   <div className="w-12 h-12 bg-wangdao-red rounded-full flex items-center justify-center text-lg font-serif">王</div>
-                   <div className="flex flex-col">
-                      <span className="font-serif text-2xl tracking-widest leading-none">AI 阿丹</span>
-                      <span className="text-[9px] text-classic-gold font-bold uppercase tracking-widest mt-1">Matrix Active</span>
-                   </div>
-                </div>
-                <button onClick={() => setIsAiOpen(false)} className="opacity-40 hover:opacity-100 transition-opacity"><X size={24}/></button>
-             </div>
-             <div className="h-[400px] bg-surface p-8 overflow-y-auto flex flex-col gap-6 custom-scrollbar">
-                {adanMessages.map((msg, i) => (
-                  <div key={i} className={`p-6 border ${msg.role === 'adan' ? 'bg-white border-outline-variant max-w-[90%] self-start italic' : 'bg-primary text-white border-primary max-w-[85%] self-end'} text-sm font-light leading-relaxed shadow-sm`}>
-                    {msg.content}
-                  </div>
-                ))}
-                {isThinking && (
-                  <div className="self-start text-wangdao-red animate-pulse text-xs font-bold tracking-widest">阿丹正在深思中...</div>
-                )}
-                {currentOracle && (
-                  <div className="p-4 bg-classic-gold/10 border-l-4 border-classic-gold text-[10px] text-on-tertiary-fixed-variant">
-                    <span className="font-bold block mb-1">戰略神諭 (Oracle)</span>
-                    {currentOracle.content}
-                  </div>
-                )}
-             </div>
-             <div className="p-8 bg-white border-t border-outline-variant flex gap-4">
-                <input 
-                  type="text" 
-                  value={inputValue}
-                  onChange={(e) => setAdanInput(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleAdanSend()}
-                  placeholder="輸入您的經營難題..." 
-                  className="flex-1 outline-none text-base font-light bg-transparent" 
-                />
-                <button onClick={handleAdanSend} className="text-wangdao-red font-bold text-xs uppercase tracking-[0.3em] active:scale-90 transition-transform">發送</button>
-             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* OmniCore v4.0 Chat Interface */}
+      <OmniCoreChat isOpen={isAiOpen} onClose={() => setIsAiOpen(false)} />
 
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
