@@ -6,6 +6,7 @@ import {
     IEvidence
 } from '../../src/omni/shared/types';
 import { hermes } from '../../src/app/hermesAgent';
+import { boostBody } from '../../src/app/boostspaceAdapter';
 
 /**
  * 🌌 OmniCore Backend Service
@@ -16,12 +17,17 @@ export class OmniCoreService {
         const start = Date.now();
         console.log(`🌌 Processing OmniCore Request: ${request.id} [${request.type}]`);
 
-        // Fast Track for Coordination/Sync tasks via Hermes
-        if (request.type === 'command' || request.content.toLowerCase().includes('sync')) {
+        // 1. Messenger Fast Track (Hermes)
+        if (request.type === 'query' && request.content.toLowerCase().includes('sync')) {
             return await hermes.dispatch(request);
         }
 
-        // Standard 5T Logic Gate Implementation
+        // 2. Body Execution Track (BoostSpace)
+        if (request.type === 'command' || request.content.toLowerCase().includes('execute')) {
+            return await boostBody.execute(request);
+        }
+
+        // 3. Standard 5T Logic Gate Implementation
         const evidence: IEvidence = {
             tangible_metric: `Audit_${request.type}_v4`,
             source_origin: `OmniCore_Request_${request.id}`,
