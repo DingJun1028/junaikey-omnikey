@@ -373,27 +373,43 @@ export default function Home() {
       {/* AI Adan Modal */}
       <AnimatePresence>
         {isAiOpen && (
-          <motion.div initial={{ opacity: 0, y: 30, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 30, scale: 0.9 }} className="fixed bottom-36 right-12 z-[160] w-[400px] bg-white border border-outline-variant shadow-2xl flex flex-col overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 30, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 30, scale: 0.9 }} className="fixed bottom-36 right-12 z-[160] w-[450px] bg-white border border-outline-variant shadow-2xl flex flex-col overflow-hidden">
              <div className="bg-primary p-8 text-white flex justify-between items-center">
                 <div className="flex items-center gap-5">
                    <div className="w-12 h-12 bg-wangdao-red rounded-full flex items-center justify-center text-lg font-serif">王</div>
-                   <span className="font-serif text-3xl tracking-widest">AI 阿丹</span>
+                   <div className="flex flex-col">
+                      <span className="font-serif text-2xl tracking-widest leading-none">AI 阿丹</span>
+                      <span className="text-[9px] text-classic-gold font-bold uppercase tracking-widest mt-1">Matrix Active</span>
+                   </div>
                 </div>
                 <button onClick={() => setIsAiOpen(false)} className="opacity-40 hover:opacity-100 transition-opacity"><X size={24}/></button>
              </div>
-             <div className="h-[450px] bg-surface p-10 overflow-y-auto flex flex-col justify-end space-y-10">
-                <div className="bg-white p-8 border border-outline-variant max-w-[95%] self-start italic text-base font-light leading-relaxed shadow-sm">
-                   您好，我是 AI 阿丹。我是 Stan 哥經營智慧的數位化身。今日想與您探討哪一維度的王道價值？
-                </div>
-                <div className="flex flex-wrap gap-3">
-                   {['三造宏碁', '利益平衡', '六面向價值'].map(t => (
-                     <button key={t} className="px-5 py-2.5 bg-white border border-outline-variant text-[11px] font-bold uppercase tracking-widest hover:border-wangdao-red hover:text-wangdao-red transition-all">{t}</button>
-                   ))}
-                </div>
+             <div className="h-[400px] bg-surface p-8 overflow-y-auto flex flex-col gap-6 custom-scrollbar">
+                {adanMessages.map((msg, i) => (
+                  <div key={i} className={`p-6 border ${msg.role === 'adan' ? 'bg-white border-outline-variant max-w-[90%] self-start italic' : 'bg-primary text-white border-primary max-w-[85%] self-end'} text-sm font-light leading-relaxed shadow-sm`}>
+                    {msg.content}
+                  </div>
+                ))}
+                {isThinking && (
+                  <div className="self-start text-wangdao-red animate-pulse text-xs font-bold tracking-widest">阿丹正在深思中...</div>
+                )}
+                {currentOracle && (
+                  <div className="p-4 bg-classic-gold/10 border-l-4 border-classic-gold text-[10px] text-on-tertiary-fixed-variant">
+                    <span className="font-bold block mb-1">戰略神諭 (Oracle)</span>
+                    {currentOracle.content}
+                  </div>
+                )}
              </div>
              <div className="p-8 bg-white border-t border-outline-variant flex gap-4">
-                <input type="text" placeholder="輸入您的經營難題..." className="flex-1 outline-none text-base font-light bg-transparent" />
-                <button className="text-wangdao-red font-bold text-xs uppercase tracking-[0.3em]">發送</button>
+                <input 
+                  type="text" 
+                  value={inputValue}
+                  onChange={(e) => setAdanInput(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleAdanSend()}
+                  placeholder="輸入您的經營難題..." 
+                  className="flex-1 outline-none text-base font-light bg-transparent" 
+                />
+                <button onClick={handleAdanSend} className="text-wangdao-red font-bold text-xs uppercase tracking-[0.3em] active:scale-90 transition-transform">發送</button>
              </div>
           </motion.div>
         )}
