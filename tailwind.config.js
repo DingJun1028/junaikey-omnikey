@@ -6,6 +6,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        "cyan-core": "#06b6d4",
+        "emerald-soul": "#10b981",
+        "void-stark": "#020617",
+        "gold-sovereign": "#ffd700",
+        "glass-surface": "rgba(15, 23, 42, 0.6)",
+        "glass-frosted": "rgba(255, 255, 255, 0.05)",
         "secondary-container": "#e3e2e1",
         "surface": "#f9f9f8",
         "surface-variant": "#e2e2e2",

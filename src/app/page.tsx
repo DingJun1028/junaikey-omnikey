@@ -61,7 +61,13 @@ export default function Home() {
   const prevSlide = () => setCarouselIndex((prev) => (prev > 0 ? prev - 1 : qnaItems.length - 1));
 
   return (
-    <div className="min-h-screen bg-surface text-on-surface font-body-md selection:bg-wangdao-red/10 antialiased overflow-x-hidden">
+    <div className="min-h-[100vh] bg-void-stark text-slate-200 font-body-md selection:bg-cyan-core/30 antialiased overflow-x-hidden relative">
+      
+      {/* Liquid Glass Background Elements */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-cyan-core/20 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-emerald-soul/10 rounded-full blur-[150px]"></div>
+      </div>
       
       {/* Search Overlay */}
       <AnimatePresence>
