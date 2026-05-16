@@ -367,6 +367,22 @@ export default function Home() {
               </div>
            </div>
         </section>
+        {/* SECTION 8.5: Swarm Mode Dashboard */}
+        <section id="swarm" className="py-24 bg-void-stark px-12 relative overflow-hidden">
+           <div className="max-w-7xl mx-auto">
+              <div className="flex justify-between items-end mb-16">
+                 <div>
+                    <span className="text-cyan-core font-bold text-[10px] tracking-[0.5em] mb-4 block uppercase">Multi-Agent Orchestration</span>
+                    <h2 className="font-serif text-5xl md:text-7xl text-white tracking-tighter">Hermes Swarm 控制台</h2>
+                 </div>
+                 <div className="hidden md:block text-right">
+                    <p className="text-slate-500 text-sm italic font-light max-w-xs">協同 5T 專家集群，實現自動化任務編排與 24/7 監控。</p>
+                 </div>
+              </div>
+              <SwarmDashboard />
+           </div>
+        </section>
+
         {/* SECTION 9: Seminar Registration (Lead Capture) */}
         <section id="enroll" className="py-40 bg-surface border-t border-outline-variant relative overflow-hidden">
            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-wangdao-red/20 to-transparent"></div>

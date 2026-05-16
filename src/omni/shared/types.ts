@@ -64,10 +64,49 @@ export interface IEvidence {
     formula_ref: string;          // 🟢 Transparent
 }
 
-export interface IComponentCore {
-    readonly uuid: string;
-    readonly timestamp: number;
-    readonly evidence: IEvidence;
-    readonly status: "Trustworthy"; // 🔴 Trustworthy
-    readonly hash_lock: string;
+/**
+ * 🐝 Hermes Swarm Types
+ */
+export interface SwarmAssignment {
+    workerId: string;
+    task: string;
+    rationale?: string;
+}
+
+export interface SwarmDispatchRequest {
+    workerIds?: string[];
+    prompt?: string;
+    missionTitle?: string;
+    assignments?: SwarmAssignment[];
+    timeoutSeconds?: number;
+    waitForCheckpoint?: boolean;
+    checkpointPollSeconds?: number;
+}
+
+export interface SwarmResult {
+    workerId: string;
+    ok: boolean;
+    delivery: 'tmux' | 'api' | 'manual';
+    checkpointStatus: 'checkpointed' | 'pending' | 'timeout' | 'failed';
+    summary?: string;
+}
+
+export interface Mission {
+    missionId: string;
+    title: string;
+    status: 'running' | 'completed' | 'blocked';
+    startTime: number;
+    assignments: SwarmAssignment[];
+    results: SwarmResult[];
+}
+
+export interface WorkerProfile {
+    workerId: string;
+    displayName: string;
+    role: string;
+    model: string;
+    specialty: string;
+    mission: string;
+    skills: string[];
+    status: 'online' | 'offline' | 'busy';
 }
