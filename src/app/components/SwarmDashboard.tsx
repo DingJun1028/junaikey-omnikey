@@ -142,20 +142,30 @@ export default function SwarmDashboard() {
                             key="kanban" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                             className="flex gap-6 h-full overflow-x-auto pb-4 custom-scrollbar"
                         >
-                            {['Ready', 'Running', 'Review', 'Done'].map(lane => (
+                            {['Backlog', 'Ready', 'Running', 'Review', 'Blocked', 'Done'].map(lane => (
                                 <div key={lane} className="flex-shrink-0 w-64 flex flex-col gap-4">
                                     <div className="flex justify-between items-center px-2">
-                                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{lane}</span>
-                                        <span className="text-[8px] font-mono text-slate-700">0</span>
+                                        <div className="flex items-center gap-2">
+                                            <div className={`w-1.5 h-1.5 rounded-full ${
+                                                lane === 'Running' ? 'bg-cyan-core animate-pulse' : 
+                                                lane === 'Review' ? 'bg-amber-500' : 
+                                                lane === 'Done' ? 'bg-emerald-soul' : 'bg-slate-700'
+                                            }`}></div>
+                                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{lane}</span>
+                                        </div>
+                                        <span className="text-[8px] font-mono text-slate-700">{lane === 'Done' ? '1' : '0'}</span>
                                     </div>
-                                    <div className="flex-1 bg-white/[0.02] border border-dashed border-white/5 rounded-3xl p-4 flex flex-col gap-4">
+                                    <div className="flex-1 bg-white/[0.02] border border-dashed border-white/5 rounded-3xl p-4 flex flex-col gap-4 min-h-[400px]">
                                         {lane === 'Done' && (
-                                            <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
-                                                <div className="text-[9px] font-bold text-emerald-soul uppercase mb-2">mission-001</div>
-                                                <div className="text-[10px] text-slate-300 mb-4 font-medium">Docs smoke test complete.</div>
-                                                <div className="flex justify-between items-center text-[8px] text-slate-500">
-                                                    <span>8B Model</span>
-                                                    <CheckCircle2 size={12}/>
+                                            <div className="p-5 bg-white/5 rounded-2xl border border-white/5 hover:border-emerald-soul/30 transition-all group">
+                                                <div className="flex justify-between items-start mb-3">
+                                                    <div className="text-[9px] font-bold text-emerald-soul uppercase tracking-tighter">mission-001</div>
+                                                    <CheckCircle2 size={12} className="text-emerald-soul"/>
+                                                </div>
+                                                <div className="text-[11px] text-slate-300 mb-4 font-medium leading-relaxed">Docs smoke test complete. Checkpoint verified.</div>
+                                                <div className="flex justify-between items-center pt-3 border-t border-white/5">
+                                                    <span className="text-[8px] text-slate-500 font-bold uppercase">Hermes-3 8B</span>
+                                                    <span className="text-[8px] text-slate-600 italic">2m ago</span>
                                                 </div>
                                             </div>
                                         )}
@@ -174,6 +184,16 @@ export default function SwarmDashboard() {
                     <span>Profiles: 2/2 Detected</span>
                 </div>
                 <span>Greenlight Gate: Enabled</span>
+            </div>
+        </div>
+    );
+}
+bg-cyan-core rounded-full shadow-lg shadow-cyan-core/50 transition-transform translate-x-6"></div>
+                        <div className="absolute -top-10 right-0 bg-primary border border-white/10 p-2 rounded text-[8px] text-white opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                            Requires Human Approval for Commits/Merges
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -29,7 +29,10 @@ export class HermesAgent {
      */
     async dispatch(request: ApiRequest): Promise<ApiResponse> {
         const start = Date.now();
-        console.log(`🕊️ Hermes Dispatching: ${request.id} using ${HermesAgent.model}`);
+        const workerId = request.data?.workerId || 'swarm-default';
+        const tmuxSession = `swarm-${workerId}`;
+        
+        console.log(`🕊️ Hermes Dispatching to TMUX Session: ${tmuxSession} using ${HermesAgent.model}`);
 
         try {
             // Step 1: Rapid 5T Pre-Audit (Tangible Check)

@@ -14,6 +14,7 @@ app.use(express.json());
 app.use('/api/aitable', aitableRoutes);
 app.use('/api/omnicore', omniCoreRoutes);
 app.use('/api/swarm', swarmRoutes);
+app.use('/api/swarm-dispatch', swarmRoutes); // Alias for Quickstart compatibility
 
 app.get('/api/health', (req, res) => {
     res.json({ status: 'active', system: 'OmniCore v4.0', timestamp: Date.now() });
