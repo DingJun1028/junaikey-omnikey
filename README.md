@@ -2,94 +2,73 @@
 
 > **「以神聖代碼契約鑄造永恆架構，在熵增的混沌中開闢秩序之路。」**
 
-ESGss JunAiKey Beta 是一個結合王道經營哲學與頂尖 AI 技術的自適應代理核心系統。專為 ESG (環境、社會、公司治理) 領域的企業決策者設計，提供具備數據信託與戰略推理能力的「AI 阿丹」智慧分身。
+ESGss JunAiKey Beta 是一個基於 **Hermes Workspace v2 (Zero-Fork)** 標準開發的自適應代理指揮中心。本平台將王道經營哲學與高性能 AI 群集調度完美融合，為企業決策者提供具備數據信託與自主執行能力的指揮介面。
 
 ---
 
 ## 💎 核心技術架構 (Ultimate Architecture)
 
 ### 1. 🌌 萬能心核 (OmniCore v4.0)
-系統採用 **雙向 TypeScript (Double-Ended TS)** 架構，確保前後端 100% 類型安全：
-*   **共享定義**: `src/omni/shared/types.ts` 定義了全系統的真理來源。
-*   **天界伺服器 (Celestial Server)**: 基於 Express，實現 **5T 邏輯門** 驗算與數據 **Hash Lock** 鎖定。
+系統採用 **雙向 TypeScript (Double-Ended TS)** 架構，實現前後端 100% 類型安全：
+*   **共享定義**: `src/omni/shared/types.ts` 定義了全系統的唯一真相來源。
+*   **天界伺服器 (Celestial Server)**: 基於 Express，實現 **5T 邏輯門** 驗算、**4+1 狀態機** 與數據 **Hash Lock** 鎖定。
 
-### 2. 🛡️ 5T 數據信託框架 (5T Data Trust)
-所有數據流必須通過以下門徑，確保數據的真實性與權威性：
-*   🟢 **Tangible (可感知)**: 將抽象願景轉化為具體指標。
-*   🟢 **Traceable (可溯源)**: 鏈式日誌完整記錄原始資料來源。
-*   🟢 **Trackable (可追蹤)**: 即時監控數據在平台間的流轉路徑。
-*   🟢 **Transparent (可透明驗算)**: 公式公開，通過零幻覺驗證。
-*   🔴 **Trustworthy (不可篡改)**: 數據寫入後即刻執行雜湊鎖定。
+### 2. 🐝 Hermes Swarm 群集調度 (Swarm Mode)
+遵循 Hermes 官方規範的生產級調度系統：
+*   **Conductor**: 支援高階任務分解（Mission Decomposition）與自主執行路徑。
+*   **Kanban TaskBoard**: 完整的 Backlog, Ready, Running, Review, Blocked, Done 泳道管理。
+*   **Greenlight Gate**: 內建安全邊界，所有破壞性操作（Commit/Merge）均需人類核准。
+*   **tmux 持久化**: 支援 TUI 模式，Agent 會話以 `swarm-<workerId>` 持久化運行。
 
-### 3. 🎨 液態玻璃 UI (Liquid Glass)
-採用 **Sovereign Bento (主權便當盒)** 佈局：
-*   **100vh 視覺**: 固定視野，最大化信息密度。
-*   **Spinach Spectrum**: 精緻的生態未來感配色 (Cyan Core, Emerald Soul)。
-*   **互動體驗**: 具備深度感與流體動態的 Glassmorphism 面板。
+### 3. 🛡️ 5T 數據信託框架 (5T Data Trust)
+所有數據流必須通過以下門徑，確保願景轉化為真實影響力：
+*   🟢 **Tangible (可感知)** | 🟢 **Traceable (可溯源)** | 🟢 **Trackable (可追蹤)**
+*   🟢 **Transparent (可透明驗算)** | 🔴 **Trustworthy (不可篡改)**
 
 ---
 
-## 🛠️ 數位武器庫 (Digital Arsenal)
+## ✨ 平台功能 (What's Inside)
 
-專案已整合多個頂尖平台，構建完整生態系：
-*   **Straico AI**: 多引擎 AI 代理，支援 Gemini 2.0 Flash 與 OpenCode (Kimi) 雙核心。
-*   **OmniTable (AITable)**: 雙向同步的 NoSQL 知識庫與 CRM。
-*   **Boost.Space**: 敏捷數據管理與自動化執行層，支援 2000+ 外部應用。
+*   💬 **Chat**: 支援 SSE 串流與多引擎 AI (Gemini 2.0 Flash & OpenCode Kimi)。
+*   🧠 **Memory**: 透過 AITable 進行戰略知識編織與長期記憶存儲。
+*   🧩 **Skills**: 整合數位武器庫，具備 2,000+ 技能調用潛力。
+*   📊 **Dashboard**: 實時 5T 治理面板與 OmniLog 稽核員。
+*   🦾 **Body**: 透過 Boost.Space 適配器觸發 2000+ 外部應用自動化。
 
 ---
 
 ## 🚀 快速開始 (Quick Start)
 
 ### 1. 環境需求 (Prerequisites)
-*   **Node.js**: 22.0.0 或更高版本
-*   **Package Manager**: `pnpm` (建議使用)
-*   **Git**: 用於版本控制
-*   **tmux**: 用於持久化 TUI 後端工作進程
-*   **Hermes Profile**: 需於 `~/.hermes/profiles/` 下配置有效的 Agent 配置文件
+*   **Node.js**: 22.0.0+
+*   **Package Manager**: `pnpm`
+*   **tmux**: 用於持久化 TUI 工作進程
+*   **Hermes Profile**: 需配置於 `~/.hermes/profiles/`
 
-### 2. 安裝環境
+### 2. 安裝與啟動
 ```bash
+# 安裝依賴
 pnpm install
+
+# 啟動開發環境 (Frontend & Celestial Server)
+pnpm dev
+cd server && pnpm dev
 ```
 
-### 2. 環境變數配置
-在 `.env.local` 中配置以下金鑰：
-```env
-NEXT_PUBLIC_STRAICO_API_KEY=your_key
-AITABLE_API_KEY=your_key
-AITABLE_BASE_ID=your_space_id
-```
-
-### 3. 啟動開發環境
+### 3. 外部服務調用 (Quickstart Curl)
 ```bash
-# 啟動前端 (Vite/Next)
-npm run dev
-
-# 啟動天界伺服器 (Celestial Server)
-cd server
-npm run dev
+curl -X POST http://localhost:3000/api/swarm-dispatch \
+  -H 'Content-Type: application/json' \
+  -d '{"workerIds": ["swarm7"], "prompt": "執行 5T 審計任務"}'
 ```
 
 ---
 
-## 📅 專案進度 (Task Roadmap)
+## 📅 戰略演進 (Roadmap)
 
-*   [x] **Stage 1**: 經濟日報創業之星報名完成。
-*   [x] **Stage 2**: 三創平台計畫複審 (5/16 - 6/15)。
-    *   [x] 5T 治理面板與多引擎 AI 具現化。
-    *   [x] AITable 數據治理中心實裝。
-    *   [x] 實體講座 Lead 捕捉邏輯部署。
-*   [ ] **Stage 3**: 獅鷲計畫 (系統解耦與 iPaaS 轉型)。
-
----
-
-## 🌟 萬能最佳實踐 (Best Practices)
-
-系統遵循《萬能智典》v4.0 核心原則：
-1. **奧義架構精煉**: 模組化與分層設計。
-2. **自我最佳實踐**: 迭代優化與熵減煉金。
-3. **永續知識構建**: 記憶宮殿與 RAG 檢索。
-4. **人機共生協作**: 直觀互動與心識介面。
+*   [x] **Stage 1**: 創業之星報名完成。
+*   [x] **Stage 2**: 三創複審技術準備 (5T Dashboard, Swarm Mode, ESG Health Check)。
+*   [ ] **Stage 3**: 獅鷲計畫 (Gryphon Plan) - iPaaS 適配器解耦與轉型。
 
 ---
 

@@ -5,15 +5,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
     Users, LayoutDashboard, ClipboardList, Inbox, 
     Play, Plus, MoreVertical, CheckCircle2, AlertCircle, 
-    ArrowRight, MessageSquare, Terminal
+    ArrowRight, MessageSquare, Terminal, Zap, ShieldCheck
 } from 'lucide-react';
-import { Mission, WorkerProfile } from '../../omni/shared/types';
+import { Mission, WorkerProfile, GatewayStatus } from '../../omni/shared/types';
 
-type ViewMode = 'roster' | 'reports' | 'inbox' | 'kanban';
+type ViewMode = 'roster' | 'reports' | 'inbox' | 'kanban' | 'conductor';
 
 export default function SwarmDashboard() {
     const [view, setView] = useState<ViewMode>('roster');
     
+    // Capability Gate State (Simulated)
+    const [gatewayStatus] = useState<GatewayStatus>({
+        available: ['chat', 'models', 'streaming', 'swarm', 'conductor'],
+        missing: ['memory-browser', 'skills-marketplace'],
+        mode: 'enhanced'
+    });
+
     const [workers] = useState<WorkerProfile[]>([
         { workerId: 'swarm7', displayName: 'Scribe', role: 'Scribe', model: 'Hermes-3 8B', specialty: 'Docs & Handoff', mission: 'Smoke test docs', skills: ['read', 'audit'], status: 'online' },
         { workerId: 'builder1', displayName: 'Architect', role: 'Builder', model: 'Gemini 2.0 Flash', specialty: 'System Core', mission: 'Gryphon Plan Refactor', skills: ['write', 'refactor'], status: 'busy' }
@@ -28,7 +35,7 @@ export default function SwarmDashboard() {
     ]);
 
     return (
-        <div className="bg-void-stark/40 border border-white/5 shadow-2xl rounded-[2.5rem] overflow-hidden flex flex-col h-[700px] backdrop-blur-3xl">
+        <div className="bg-void-stark/40 border border-white/5 shadow-2xl rounded-[2.5rem] overflow-hidden flex flex-col h-[750px] backdrop-blur-3xl">
             {/* Header / Nav */}
             <div className="p-8 bg-void-stark/80 flex justify-between items-center border-b border-white/5">
                 <div className="flex items-center gap-6">
@@ -42,7 +49,8 @@ export default function SwarmDashboard() {
                                 { id: 'roster', l: 'Roster', i: <Users size={12}/> },
                                 { id: 'reports', l: 'Reports', i: <ClipboardList size={12}/> },
                                 { id: 'inbox', l: 'Inbox', i: <Inbox size={12}/> },
-                                { id: 'kanban', l: 'Board', i: <LayoutDashboard size={12}/> }
+                                { id: 'kanban', l: 'Board', i: <LayoutDashboard size={12}/> },
+                                { id: 'conductor', l: 'Conductor', i: <Play size={12}/> }
                             ].map(tab => (
                                 <button 
                                     key={tab.id} onClick={() => setView(tab.id as any)}
@@ -86,7 +94,7 @@ export default function SwarmDashboard() {
                                         </div>
                                     </div>
                                     <div className="flex gap-3 pt-4 border-t border-white/5">
-                                        <button className="flex-1 py-2 bg-white/5 rounded-xl text-[9px] font-bold text-slate-300 uppercase tracking-widest hover:bg-white/10 flex items-center justify-center gap-2"><Terminal size={12}/> Attach</button>
+                                        <button className="flex-1 py-2 bg-white/5 rounded-xl text-[9px] font-bold text-slate-300 uppercase tracking-widest hover:bg-white/10 flex items-center justify-center gap-2"><Terminal size={12}/> Attach TUI</button>
                                         <button className="p-2 bg-white/5 rounded-xl text-slate-400 hover:text-white"><MoreVertical size={14}/></button>
                                     </div>
                                 </div>
@@ -174,21 +182,78 @@ export default function SwarmDashboard() {
                             ))}
                         </motion.div>
                     )}
+
+                    {view === 'conductor' && (
+                        <motion.div 
+                            key="conductor" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                            className="flex flex-col gap-8"
+                        >
+                            <div className="p-8 bg-white/[0.02] border border-white/5 rounded-[2.5rem]">
+                                <div className="flex justify-between items-start mb-10">
+                                    <div>
+                                        <h3 className="text-white font-serif text-3xl mb-2">Mission Control</h3>
+                                        <p className="text-slate-500 text-sm italic">Decompose high-level goals into autonomous agent workflows.</p>
+                                    </div>
+                                    <div className="flex items-center gap-3 px-4 py-2 bg-cyan-core/10 rounded-xl">
+                                        <div className="w-1.5 h-1.5 bg-cyan-core rounded-full animate-pulse"></div>
+                                        <span className="text-[9px] font-bold text-cyan-core uppercase tracking-widest">Conductor Active</span>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex gap-4 mb-12">
+                                    <input type="text" placeholder="Enter high-level mission goal (e.g. 'Audit project X for 5T compliance')" className="flex-1 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white outline-none focus:border-cyan-core/50 transition-all text-sm" />
+                                    <button className="px-8 py-4 bg-primary text-white border border-white/10 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-cyan-core hover:text-void-stark transition-all">Decompose ⟶</button>
+                                </div>
+
+                                <div className="space-y-4">
+                                    {[
+                                        { s: 'Researching 5T Metrics', r: 'Sage', st: 'completed' },
+                                        { s: 'Generating Audit Log', r: 'Builder', st: 'running' },
+                                        { s: 'Final Verification', r: 'Reviewer', st: 'pending' }
+                                    ].map((step, i) => (
+                                        <div key={i} className="flex items-center justify-between p-5 bg-white/5 rounded-2xl border border-white/5 group hover:bg-white/[0.08] transition-all">
+                                            <div className="flex items-center gap-6">
+                                                <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-mono text-[10px] ${step.st === 'completed' ? 'bg-emerald-soul/20 text-emerald-soul' : step.st === 'running' ? 'bg-cyan-core/20 text-cyan-core' : 'bg-slate-800 text-slate-500'}`}>{i+1}</div>
+                                                <div>
+                                                    <div className="text-[11px] text-white font-medium">{step.s}</div>
+                                                    <div className="text-[8px] text-slate-500 uppercase font-bold tracking-tighter">Assigned to: <span className="text-slate-400">{step.r}</span></div>
+                                                </div>
+                                            </div>
+                                            <div className="text-[8px] font-bold uppercase tracking-widest">
+                                                {step.st === 'completed' ? <span className="text-emerald-soul">Land Checkpoint</span> : step.st === 'running' ? <span className="text-cyan-core animate-pulse">In Progress</span> : <span className="text-slate-600">Queued</span>}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
                 </AnimatePresence>
             </div>
 
             {/* Bottom Status */}
-            <div className="p-4 bg-void-stark/60 border-t border-white/5 flex justify-between items-center text-[8px] font-bold text-slate-500 uppercase tracking-[0.3em]">
-                <div className="flex gap-6">
-                    <span className="flex items-center gap-2"><div className="w-1 h-1 bg-emerald-soul rounded-full"></div> Swarm Sync Active</span>
-                    <span>Profiles: 2/2 Detected</span>
+            <div className="p-6 bg-void-stark/60 border-t border-white/5 flex justify-between items-center">
+                <div className="flex gap-8">
+                    <div className="flex flex-col">
+                        <span className="text-[7px] text-slate-500 uppercase font-bold mb-1">System Status</span>
+                        <span className="flex items-center gap-2 text-[9px] font-bold text-emerald-soul uppercase tracking-widest">
+                            <div className="w-1.5 h-1.5 bg-emerald-soul rounded-full animate-pulse"></div> 
+                            Swarm Sync Active
+                        </span>
+                    </div>
+                    <div className="flex flex-col border-l border-white/10 pl-8">
+                        <span className="text-[7px] text-slate-500 uppercase font-bold mb-1">Worker Profiles</span>
+                        <span className="text-[9px] font-bold text-slate-300 uppercase tracking-widest">2/2 Detected in ~/.hermes/</span>
+                    </div>
                 </div>
-                <span>Greenlight Gate: Enabled</span>
-            </div>
-        </div>
-    );
-}
-bg-cyan-core rounded-full shadow-lg shadow-cyan-core/50 transition-transform translate-x-6"></div>
+
+                <div className="flex items-center gap-6">
+                    <div className="flex flex-col items-end mr-4">
+                        <span className="text-[7px] text-slate-500 uppercase font-bold mb-1">Safety Boundary</span>
+                        <span className="text-[9px] font-bold text-cyan-core uppercase tracking-[0.2em]">Greenlight Gate: Enabled</span>
+                    </div>
+                    <div className="w-12 h-6 bg-cyan-core/10 rounded-full p-1 border border-cyan-core/30 cursor-pointer relative group">
+                        <div className="w-4 h-4 bg-cyan-core rounded-full shadow-lg shadow-cyan-core/50 transition-transform translate-x-6"></div>
                         <div className="absolute -top-10 right-0 bg-primary border border-white/10 p-2 rounded text-[8px] text-white opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                             Requires Human Approval for Commits/Merges
                         </div>

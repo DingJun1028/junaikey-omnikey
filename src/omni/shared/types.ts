@@ -100,13 +100,28 @@ export interface Mission {
     results: SwarmResult[];
 }
 
-export interface WorkerProfile {
-    workerId: string;
-    displayName: string;
-    role: string;
-    model: string;
-    specialty: string;
-    mission: string;
-    skills: string[];
-    status: 'online' | 'offline' | 'busy';
+export interface MissionStep {
+    id: string;
+    task: string;
+    workerRole: string;
+    status: 'pending' | 'running' | 'completed' | 'failed';
+    result?: string;
+}
+
+export interface ConductorMission {
+    missionId: string;
+    title: string;
+    goal: string;
+    steps: MissionStep[];
+    status: 'decomposing' | 'executing' | 'completed' | 'blocked';
+    createdAt: number;
+}
+
+/**
+ * 🔐 Security & Gateway Types
+ */
+export interface GatewayStatus {
+    available: string[];
+    missing: string[];
+    mode: 'portable' | 'enhanced' | 'disconnected';
 }
