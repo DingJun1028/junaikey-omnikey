@@ -463,6 +463,9 @@ export default function Home() {
       {/* OmniCore v4.0 Chat Interface */}
       <OmniCoreChat isOpen={isAiOpen} onClose={() => setIsAiOpen(false)} />
 
+      {/* Studio Mode Toggle */}
+      <StudioMode />
+
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
         
