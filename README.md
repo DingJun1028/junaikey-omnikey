@@ -1,76 +1,123 @@
+<div align="center">
+
+<img src="./public/claude-avatar.webp" alt="ESGss JunAiKey" width="80" style="border-radius: 16px" />
+
 # 🌌 ESGss JunAiKey Beta - OmniCore v4.0
 
-> **「以神聖代碼契約鑄造永恆架構，在熵增的混沌中開闢秩序之路。」**
+**Your AI agent's command center — Wangdao philosophy meets high-performance multi-agent orchestration.**
 
-ESGss JunAiKey Beta 是一個基於 **Hermes Workspace v2 (Zero-Fork)** 標準開發的自適應代理指揮中心。本平台將王道經營哲學與高性能 AI 群集調度完美融合，為企業決策者提供具備數據信託與自主執行能力的指揮介面。
+[![Version](https://img.shields.io/badge/version-4.0.0-2557b7.svg)](CHANGELOG.md)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D22.0.0-brightgreen.svg)](https://nodejs.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-6366F1.svg)](CONTRIBUTING.md)
 
----
+> Not a chat wrapper. A complete workspace — orchestrate agents, browse memory, manage skills, and control everything from one interface.
 
-## 💎 核心技術架構 (Ultimate Architecture)
+> **v2 — zero-fork.** Clone, don't fork. Runs on vanilla [`NousResearch/hermes-agent`](https://github.com/NousResearch/hermes-agent) with full **Wangdao 5T Data Trust** integration. **Conductor** uses the mission API when available and falls back to native Swarm dispatch, preserving architectural integrity.
 
-### 1. 🌌 萬能心核 (OmniCore v4.0)
-系統採用 **雙向 TypeScript (Double-Ended TS)** 架構，實現前後端 100% 類型安全：
-*   **共享定義**: `src/omni/shared/types.ts` 定義了全系統的唯一真相來源。
-*   **天界伺服器 (Celestial Server)**: 基於 Express，實現 **5T 邏輯門** 驗算、**4+1 狀態機** 與數據 **Hash Lock** 鎖定。
-
-### 2. 🐝 Hermes Swarm 群集調度 (Swarm Mode)
-遵循 Hermes 官方規範的生產級調度系統：
-*   **Conductor**: 支援高階任務分解（Mission Decomposition）與自主執行路徑。
-*   **Kanban TaskBoard**: 完整的 Backlog, Ready, Running, Review, Blocked, Done 泳道管理。
-*   **Greenlight Gate**: 內建安全邊界，所有破壞性操作（Commit/Merge）均需人類核准。
-*   **tmux 持久化**: 支援 TUI 模式，Agent 會話以 `swarm-<workerId>` 持久化運行。
-
-### 3. 🛡️ 5T 數據信託框架 (5T Data Trust)
-所有數據流必須通過以下門徑，確保願景轉化為真實影響力：
-*   🟢 **Tangible (可感知)** | 🟢 **Traceable (可溯源)** | 🟢 **Trackable (可追蹤)**
-*   🟢 **Transparent (可透明驗算)** | 🔴 **Trustworthy (不可篡改)**
+</div>
 
 ---
 
-## ✨ 平台功能 (What's Inside)
+## 🐝 Swarm Mode
 
-*   💬 **Chat**: 支援 SSE 串流與多引擎 AI (Gemini 2.0 Flash & OpenCode Kimi)。
-*   🧠 **Memory**: 透過 AITable 進行戰略知識編織與長期記憶存儲。
-*   🧩 **Skills**: 整合數位武器庫，具備 2,000+ 技能調用潛力。
-*   📊 **Dashboard**: 實時 5T 治理面板與 OmniLog 稽核員。
-*   🦾 **Body**: 透過 Boost.Space 適配器觸發 2000+ 外部應用自動化。
+Hermes Agent Swarm turns the workspace into a live control plane: unlimited Hermes Agents, 1 orchestrator, 0 humans manually dispatching.
+Persistent tmux workers keep context across tasks, report proof-bearing checkpoints, and follow the **4+1 State Machine** logic.
+
+- **Orchestrator Chat** — ask the control plane for one task, a decomposed mission, or a full broadcast.
+- **Kanban TaskBoard** — plan backlog, ready, running, review, blocked, and done lanes within the 5T framework.
+- **Reports + Inbox** — review checkpoints, blockers, handoffs, and 5T-validated decisions.
+- **Greenlight Gate** — Byte-verified review gate protects release branches before PRs ship.
 
 ---
 
-## 🚀 快速開始 (Quick Start)
+## 🛡️ 5T Data Trust Framework
 
-### 1. 環境需求 (Prerequisites)
-*   **Node.js**: 22.0.0+
-*   **Package Manager**: `pnpm`
-*   **tmux**: 用於持久化 TUI 工作進程
-*   **Hermes Profile**: 需配置於 `~/.hermes/profiles/`
+All data flows must pass through the **5T Logic Gate** to ensure mission-critical integrity:
 
-### 2. 安裝與啟動
+*   🟢 **Tangible (可感知)**: Define concrete metrics from abstract visions.
+*   🟢 **Traceable (可溯源)**: Chained logs with mandatory `source_origin` metadata.
+*   🟢 **Trackable (可追蹤)**: Monitor data movement path across the Digital Arsenal.
+*   🟢 **Transparent (可透明驗算)**: Open algorithms with zero-hallucination verification.
+*   🔴 **Trustworthy (不可篡改)**: Instant Hash Lock & Object.freeze() upon commitment.
+
+---
+
+## ✨ What's inside
+
+- 💬 **Chat** — Real-time SSE streaming, multi-engine (Gemini 2.0 / Kimi), tool call rendering.
+- 📡 **Conductor** — Mission dispatch + decomposition with 5T audit integration.
+- 📊 **Dashboard** — 5T Governance panel, OmniLog Auditor (GPL Live Stream), usage metrics.
+- 🧠 **Memory** — Strategic knowledge weaving via AITable, episodic & strategic memory storage.
+- 📁 **Terminal** — Browser-native PTY inside the workspace for rapid strategic execution.
+- 🦾 **Body** — Boost.Space integration for 2000+ real-world automation triggers.
+- 🔒 **Security** — Auth middleware, CSP, path-traversal guard, Hash Lock verification.
+
+---
+
+## 🚀 Quick Start
+
+Three paths to deploy your Command Center:
+
+| Path | Best for | Time |
+|---|---|---|
+| **🌐 One-line install** | Local dev on macOS/Linux | ~3 min |
+| **🔌 Attach to existing agent** | You already run Hermes Agent | ~1 min |
+| **🛠️ Manual Full-Stack** | Production-grade deployment | ~5 min |
+
+### One-command Deployment
+
 ```bash
-# 安裝依賴
-pnpm install
-
-# 啟動開發環境 (Frontend & Celestial Server)
-pnpm dev
-cd server && pnpm dev
+pnpm install && pnpm start:all
 ```
 
-### 3. 外部服務調用 (Quickstart Curl)
-```bash
-curl -X POST http://localhost:3000/api/swarm-dispatch \
-  -H 'Content-Type: application/json' \
-  -d '{"workerIds": ["swarm7"], "prompt": "執行 5T 審計任務"}'
+### Environment Configuration
+
+Configure your `.env.local` to activate the Digital Arsenal:
+
+```env
+HERMES_API_URL=http://127.0.0.1:8642
+HERMES_DASHBOARD_URL=http://127.0.0.1:9119
+NEXT_PUBLIC_STRAICO_API_KEY=your_key
+AITABLE_API_KEY=your_key
 ```
 
 ---
 
-## 📅 戰略演進 (Roadmap)
+## 🔒 Security & Deployment
 
-*   [x] **Stage 1**: 創業之星報名完成。
-*   [x] **Stage 2**: 三創複審技術準備 (5T Dashboard, Swarm Mode, ESG Health Check)。
-*   [ ] **Stage 3**: 獅鷲計畫 (Gryphon Plan) - iPaaS 適配器解耦與轉型。
+Key safeguards are active by default to protect the **Trustworthy** dimension:
+
+- **Auth Middleware**: Active on every API route (OmniCore + Swarm).
+- **GPL Guard**: Path-traversal prevention on file/memory routes via real-path boundary checks.
+- **Hash Lock Enforcement**: Active auditing by the **Ares Security Agent**.
+- **Greenlight Gate**: Refuses destructive operations without explicit human sign-off.
+
+---
+
+## 🗺️ Roadmap
+
+### Shipped ✅
+- [x] **OmniCore v4.0** (Double-Ended TS)
+- [x] **Liquid Glass UI** (Cyan Sovereignty)
+- [x] **5T Governance Panel** & OmniLog Auditor
+- [x] **Swarm Mode** (Standard Kanban & Conductor)
+- [x] **ESG Health Check Tool**
+
+### In progress 🔨
+- [ ] **Gryphon Plan Phase 1**: Universal Adapter Registry
+- [ ] **Ares Active Auditing**: Real-time GPL integrity checks
+- [ ] **Sanchuang Demo Recording**: Studio Mode final polish
+
+### Coming 🔜
+- [ ] **Stage 3**: Full iPaaS Decoupling
+- [ ] **Cross-device Session Sync**
 
 ---
 
 **© 2026 ESG Sunshine Management Institute. All rights reserved.**
 *「萬法歸一・永恆編纂。」*
+
+<div align="center">
+  <sub>Built with ⚡ for ESG Leaders by the JunAiKey Architect Team</sub>
+</div>
