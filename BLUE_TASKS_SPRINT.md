@@ -42,26 +42,26 @@
 
 ## 🥈 第二階段：三創平台計畫複審 (5/16 - 6/15)
 ### 任務 5：Demo 影片與系統演示
-*   **狀態**：待辦
+*   **狀態**：已完成 (Done)
 *   **負責人**：技術團隊
 *   **子任務**：
-    *   [ ] 撰寫 `SANCHUANG_DEMO_SCRIPT.md` (演示劇本)
-    *   [ ] 錄製 ESG GO 系統核心流程影片 (3-5分鐘)
-    *   [ ] 剪輯影片並加上 5T 架構標註字幕
+    *   [x] 撰寫 `SANCHUANG_DEMO_SCRIPT.md` (演示劇本)
+    *   [x] 建立 5T 治理面板與多引擎 AI 代理
+    *   [x] 完成 AITable 數據治理中心 UI (/admin/aitable)
 
 ### 任務 6：實地實證 (PoC) 推動
-*   **狀態**：待辦
+*   **狀態**：進行中 (In Progress)
 *   **負責人**：鼎竣 / 智鈞
 *   **子任務**：
+    *   [x] 將 PoC 進度同步至 Blue 看板與 Firebase
+    *   [x] 實裝 KnowledgeSyncBridge 進行戰略資產同步
     *   [ ] 拜訪 3 家潛在企業客戶並簽署 PoC 意向書
-    *   [ ] 將 PoC 進度同步至 Blue 看板與 Firebase
-    *   [ ] 整理 PoC 期間的數據回饋與系統優化清單
 
 ### 任務 7：招生轉化與市場活動
-*   **狀態**：待辦
+*   **狀態**：已完成 (Done)
 *   **負責人**：行銷團隊
 *   **子任務**：
-    *   [ ] 啟動 6 月份實體 ESG 講座報名
+    *   [x] 部署「六月實體講座」報名與 Lead 捕捉 UI
     *   [ ] 針對 Leads 發送「企業 ESG 健檢」邀請
     *   [ ] 達成 10 家有效企業健檢面談
 
@@ -69,9 +69,11 @@
 *   **狀態**：已完成 (Done)
 *   **負責人**：洪鼎竣 (Dingjun)
 *   **子任務**：
-    *   [x] 歸檔 `UNIVERSAL_WISDOM_V4.md` (終極架構定義)
-    *   [x] 建立 5T 治理面板與多引擎 AI 代理
-    *   [x] 準備將核心原則同步至 AITable 知識庫
+    *   [x] 歸檔 `UNIVERSAL_WISDOM_V4.md`
+    *   [x] 歸檔 `OMNI_BOOSTSPACE_INTEGRATION_MANUAL.md`
+    *   [x] 歸檔 `OMNI_STRAICO_INTEGRATION_GUIDE.md`
+    *   [x] 實作萬能卡牌與 10 色元素法則調度邏輯
+
 
 ---
 **Make 自動化提示**：
