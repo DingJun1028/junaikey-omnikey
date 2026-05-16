@@ -353,6 +353,44 @@ export default function Home() {
               </div>
            </div>
         </section>
+        {/* SECTION 9: Seminar Registration (Lead Capture) */}
+        <section id="enroll" className="py-40 bg-surface border-t border-outline-variant relative overflow-hidden">
+           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-wangdao-red/20 to-transparent"></div>
+           <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+              <span className="text-wangdao-red font-bold text-[11px] tracking-[0.5em] mb-6 block uppercase">Join the Elite</span>
+              <h2 className="font-serif text-5xl md:text-7xl text-primary mb-8 tracking-tighter">六月王道經營實體講座</h2>
+              <p className="text-xl text-on-surface-variant font-light leading-relaxed italic mb-16">
+                 「在 AI 時代重新定義領導力。」席次有限，僅開放給具備永續願景的企業決策者。
+              </p>
+              
+              <div className="bg-white border border-outline-variant p-10 md:p-16 shadow-2xl text-left">
+                 <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+                    <div className="grid md:grid-cols-2 gap-8">
+                       <div className="space-y-3">
+                          <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">姓名 Full Name</label>
+                          <input type="text" className="w-full bg-slate-50 border-b border-slate-200 py-3 outline-none focus:border-wangdao-red transition-colors font-serif text-xl" placeholder="您的姓名" />
+                       </div>
+                       <div className="space-y-3">
+                          <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">公司/職稱 Organization</label>
+                          <input type="text" className="w-full bg-slate-50 border-b border-slate-200 py-3 outline-none focus:border-wangdao-red transition-colors font-serif text-xl" placeholder="公司名稱" />
+                       </div>
+                    </div>
+                    <div className="space-y-3">
+                       <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">電子郵件 Email Address</label>
+                       <input type="email" className="w-full bg-slate-50 border-b border-slate-200 py-3 outline-none focus:border-wangdao-red transition-colors font-serif text-xl" placeholder="example@email.com" />
+                    </div>
+                    <button className="w-full bg-primary text-white py-8 text-xs font-bold uppercase tracking-[0.5em] hover:bg-wangdao-red transition-all shadow-xl active:scale-[0.98]">
+                       提交報名申請 ⟶
+                    </button>
+                 </form>
+                 <div className="mt-8 flex items-center gap-3">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Data encrypted via 5T Trust Protocol</span>
+                 </div>
+              </div>
+           </div>
+        </section>
+
       </main>
 
       {/* FOOTER */}
