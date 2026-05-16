@@ -2,7 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 你可以在這裡加上全域樣式，例如字體或重置 */
+:root {
+  --wangdao-red: #9E1B21;
+  --classic-gold: #C5A059;
+}
+
 body {
-  @apply bg-gray-50 text-gray-900;
+  @apply bg-surface text-on-surface antialiased;
+  font-family: 'Hanken Grotesk', sans-serif;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: 'Newsreader', serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--wangdao-red);
+  border-radius: 10px;
+}
+
+/* Dragon Watermark utility */
+.dragon-bg-mask {
+  position: relative;
+}
+.dragon-bg-mask::before {
+  content: '王';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50vw;
+  font-family: 'Newsreader', serif;
+  color: #000;
+  opacity: 0.015;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+/* Reveal Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }

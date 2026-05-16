@@ -8,3 +8,4 @@ export { StraicoClient } from "../straicoClient";
 export { FirebaseClient } from "../firebaseClient";
 export { InfoflowClient } from "../infoflowClient";
 export { VSCodeClient } from "../vscodeClient";
+export { BlueClient } from "../blueClient";

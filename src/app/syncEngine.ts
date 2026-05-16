@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BlueClient } from "./blueClient";
 
 export interface SyncEngineOptions {
   platforms: string[];
@@ -18,8 +19,15 @@ export function useSyncEngine(
     "straico",
     "firebase",
     "infoflow",
+    "blue",
   ];
   const conflictKeys = options?.conflictKeys || ["id", "name", "title"];
+
+  // Initialize BlueClient (using public env vars for client-side)
+  const blueClient = new BlueClient(
+    process.env.NEXT_PUBLIC_BLUE_API_KEY || '',
+    process.env.NEXT_PUBLIC_BLUE_COMPANY_ID || ''
+  );
 
   useEffect(() => {
     // 只取 array 型資料平台
@@ -36,23 +44,40 @@ export function useSyncEngine(
     setConflicts(conflictList);
   }, [platformData, platforms, conflictKeys]);
 
-  // 批次同步範例（Boost.space → Aitable）
+  // 批次同步 (Multi-platform Sync)
   const batchSync = async () => {
-    const newTasks = (platformData.boostspace || []).filter(
+    const workspaceId = process.env.NEXT_PUBLIC_BLUE_WORKSPACE_ID || '';
+    const newTasksForBlue = (platformData.boostspace || []).filter(
+      b => !(platformData.blue || []).some((a: any) => a.id === b.id)
+    );
+
+    if (newTasksForBlue.length > 0) {
+      onSyncLog(`🔄 正在同步 ${newTasksForBlue.length} 筆資料至 Blue.cc...`);
+      try {
+        for (const task of newTasksForBlue) {
+          await blueClient.createRecord(workspaceId, 'cmp2eu2gi0ajopo01bxq8k8ib', task.name || task.title, task.description || '');
+        }
+        onSyncLog(`✅ 同步至 Blue.cc 成功`);
+      } catch (err: any) {
+        onSyncLog(`❌ 同步至 Blue.cc 失敗: ${err.message}`);
+      }
+    }
+
+    // Existing Aitable Sync logic
+    const newTasksForAitable = (platformData.boostspace || []).filter(
       b => !(platformData.aitable || []).some(a => a.id === b.id)
     );
-    if (newTasks.length > 0) {
-      // 動態載入 client，減少耦合
+    if (newTasksForAitable.length > 0) {
       const { AitableClient } = await import("./aitApiClient");
       const aitableClient = new AitableClient("Tasks");
       try {
-        const res = await aitableClient.createRecords(newTasks.map(item => ({ fields: item })));
-        onSyncLog(`批次同步到 Aitable 成功: ${JSON.stringify(res)}`);
+        await aitableClient.createRecords(newTasksForAitable.map(item => ({ fields: item })));
+        onSyncLog(`✅ 同步到 Aitable 成功`);
       } catch (err) {
-        onSyncLog(`批次同步到 Aitable 失敗: ${err}`);
+        onSyncLog(`❌ 同步到 Aitable 失敗: ${err}`);
       }
     } else {
-      onSyncLog("無新任務可批次同步");
+      onSyncLog("無新任務需同步至其他平台");
     }
   };
 

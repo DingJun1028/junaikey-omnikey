@@ -1,1 +1,87 @@
-node_modules
+# dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+dist/
+tsconfig.tsbuildinfo
+
+# env
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+firebase-debug.log
+*.txt
+*.log
+
+# misc
+.DS_Store
+.vercel
+.firebase/
+.idea/
+.vscode/
+
+# Agent/CLI artifacts
+.antigravity/
+.antigravity_cockpit/
+.agents/
+.gemini/
+.aitk/
+.claude/
+.cline/
+.codex/
+.cora/
+.deno/
+.docker/
+.friday/
+.friday-ai/
+.fusebase/
+.genkit/
+.gsutil/
+.history/
+.kiro/
+.kube/
+.lmstudio/
+.mcp-auth/
+.minikube/
+.nocodebackend/
+.npm/
+.ollama/
+.omni_sync/
+.openclaw/
+.pencil/
+.redhat/
+.rest-client/
+.tabby-client/
+.vs-kubernetes/
+.vscode-server-insiders/
+
+# Junk/Conflicts
+*.conflict
+utputFormat
+NTUSER.DAT*
+ntuser.dat*
+ntuser.ini
+AppData/
+Contacts/
+Documents/
+Downloads/
+Favorites/
+Links/
+Saved Games/
+Searches/
+OneDrive/
+iCloudDrive/
+iCloudPhotos/
+go/
+backup_files/
+node_modules.conflict/
+wangdao_v3_dist/
+utputFormat
