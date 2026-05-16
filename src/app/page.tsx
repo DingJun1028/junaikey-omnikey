@@ -311,13 +311,24 @@ export default function Home() {
                  <p className="text-xl text-slate-500 font-light leading-relaxed mb-16 italic max-w-lg">
                     王道智慧引擎「阿丹」具備雙核心設計。透過 5T 數據信託架構，我們確保了決策的透明度與可追溯性，平衡封閉強模型與開源透明的優勢。
                  </p>
-                 <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-                    {['文化智囊', '價值診斷', '平衡預測', '轉譯引擎'].map(f => (
-                      <div key={f} className="flex items-center gap-4 text-[11px] font-bold uppercase tracking-widest text-primary border-b border-outline-variant pb-4 hover:text-wangdao-red hover:border-wangdao-red cursor-help transition-all">
-                        <div className="w-1.5 h-1.5 bg-classic-gold rounded-full group-hover:scale-150 transition-transform"></div> {f}
-                      </div>
-                    ))}
-                 </div>
+              <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+                {[
+                  { n: 'Chat', d: 'Multi-model conversations with real-time tool activity.', icon: <MessageSquare size={14}/> },
+                  { n: 'Conductor', d: 'Mission orchestrator — spawn parallel agents.', icon: <Play size={14}/> },
+                  { n: 'Dashboard', d: 'At-a-glance metrics across sessions and tokens.', icon: <BarChart3 size={14}/> },
+                  { n: 'Memory', d: 'Browse and search what your agent remembers.', icon: <BookOpen size={14}/> },
+                  { n: 'Terminal', d: 'Browser-native pty inside the workspace.', icon: <Terminal size={14}/> },
+                  { n: 'Settings', d: 'Themes, providers, and system accents.', icon: <Settings size={14}/> }
+                ].map(f => (
+                  <div key={f.n} className="p-4 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-cyan-core/30 transition-all group cursor-help">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="p-2 bg-cyan-core/10 rounded-lg text-cyan-core group-hover:bg-cyan-core group-hover:text-void-stark transition-all">{f.icon}</div>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-white">{f.n}</span>
+                    </div>
+                    <p className="text-[9px] text-slate-500 leading-relaxed">{f.d}</p>
+                  </div>
+                ))}
+              </div>
               </div>
               
               {/* 5T Trust Dashboard */}
