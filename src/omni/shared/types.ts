@@ -125,3 +125,22 @@ export interface GatewayStatus {
     missing: string[];
     mode: 'portable' | 'enhanced' | 'disconnected';
 }
+
+export interface IComponentCore {
+    uuid: string;
+    timestamp: number;
+    evidence: IEvidence;
+    status: string;
+    hash_lock: string;
+}
+
+export interface WorkerProfile {
+    workerId: string;
+    displayName: string;
+    role: string;
+    model: string;
+    specialty: string;
+    mission: string;
+    skills: string[];
+    status: 'online' | 'busy' | 'offline';
+}

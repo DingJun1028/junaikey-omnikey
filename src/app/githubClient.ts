@@ -23,7 +23,7 @@ export class GithubClient {
     const url = `${this.getRepoUrl()}/issues`;
     const res = await fetch(url, { headers: this.headers });
     if (!res.ok) throw new Error(`Get issues failed: ${res.statusText}`);
-    return await res.json();
+    return await res.json() as any[];
   }
   async createIssue(title: string, body: string): Promise<any> {
     const url = `${this.getRepoUrl()}/issues`;

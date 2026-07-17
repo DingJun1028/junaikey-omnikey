@@ -20,7 +20,7 @@ export class JulesClient {
       body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
     });
     if (!res.ok) throw new Error(`Jules API failed: ${res.statusText}`);
-    const data = await res.json();
+    const data = await res.json() as any;
     return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
   }
 }

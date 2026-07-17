@@ -133,7 +133,7 @@ export default function SwarmDashboard() {
                     )}
 
                     {view === 'inbox' && (
-                        <motion.div 
+                        <motion.div
                             key="inbox" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                             className="flex flex-col items-center justify-center h-full text-center py-20"
                         >
@@ -141,7 +141,7 @@ export default function SwarmDashboard() {
                                 <Inbox size={32} />
                             </div>
                             <h3 className="text-white font-serif text-xl mb-2">Inbox is Clear</h3>
-                            <p className="text-slate-500 text-sm italic">The swarm hasn't asked for any judgment yet.</p>
+                            <p className="text-slate-500 text-sm italic">The swarm hasn&apos;t asked for any judgment yet.</p>
                         </motion.div>
                     )}
 

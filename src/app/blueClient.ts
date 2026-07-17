@@ -66,4 +66,9 @@ export class BlueClient {
     const data = await this.query(q, { workspaceId, listId, title, description });
     return data.createRecord.record;
   }
+
+  async updateCustomField(_workspaceId: string, _recordId: string, _fieldId: string, _value: string) {
+    // TODO: Implement Blue.cc custom field update via GraphQL
+    console.warn('updateCustomField not implemented');
+  }
 }

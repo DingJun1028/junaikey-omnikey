@@ -16,7 +16,7 @@ export class FirebaseClient {
   async getDocuments(): Promise<any[]> {
     const res = await fetch(this.getCollectionUrl(), { headers: this.headers });
     if (!res.ok) throw new Error(`Get documents failed: ${res.statusText}`);
-    const data = await res.json();
+    const data = await res.json() as { documents?: any[] };
     return data.documents || [];
   }
   async createDocument(document: any): Promise<any> {

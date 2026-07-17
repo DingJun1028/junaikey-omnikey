@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
-import { 
-    SwarmDispatchRequest, 
-    Mission, 
-    SwarmResult, 
-    OmniResponseStatus 
+import {
+    SwarmDispatchRequest,
+    Mission,
+    SwarmResult,
+    OmniResponseStatus
 } from '../../src/omni/shared/types';
 import { hermes } from '../../src/app/hermesAgent';
 

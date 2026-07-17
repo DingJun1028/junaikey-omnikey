@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, BarChart3, ArrowRight, ClipboardCheck, Sparkles, RefreshCcw } from 'lucide-react';
 import { omniClient } from '../api/omniClient';
-import { OmniRequestType } from '../omni/shared/types';
+import { OmniRequestType } from '../../omni/shared/types';
 
 const steps = [
   { id: 'tangible', label: '有形價值', q: '貴司目前的 ESG 投入是否具備明確的財務預算與專款專用機制？', icon: <BarChart3 /> },

@@ -8,7 +8,7 @@ import {
     OmniResponseStatus, 
     Message, 
     ApiResponse 
-} from '../omni/shared/types';
+} from '../../omni/shared/types';
 
 interface OmniCoreChatProps {
     isOpen: boolean;

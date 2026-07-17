@@ -46,10 +46,3 @@ export default function AITableAdminPage() {
     </div>
   );
 }
-ng-[0.4em]">
-           OmniTable Integration Engine V1.0 • ESG Sunshine Digital Arsenal
-        </footer>
-      </div>
-    </div>
-  );
-}

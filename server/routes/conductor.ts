@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-import { 
-    ConductorMission, 
-    MissionStep, 
-    OmniResponseStatus 
+import {
+    ConductorMission,
+    MissionStep,
+    OmniResponseStatus
 } from '../../src/omni/shared/types';
 import { hermes } from '../../src/app/hermesAgent';
 

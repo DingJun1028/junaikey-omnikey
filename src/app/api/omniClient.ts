@@ -2,12 +2,12 @@
  * 🌌 OmniCore Frontend Client
  * Fully type-safe communication with the OmniCore backend.
  */
-import { 
-    ApiRequest, 
-    ApiResponse, 
+import {
+    ApiRequest,
+    ApiResponse,
     OmniRequestType,
     EternalMemoryType
-} from '../omni/shared/types';
+} from '../../omni/shared/types';
 
 export class OmniCoreClient {
     private baseUrl: string = '/api';

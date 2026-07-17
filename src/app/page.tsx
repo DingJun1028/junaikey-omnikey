@@ -6,10 +6,14 @@ import {
   ChevronLeft, ChevronRight, MessageSquare, X, 
   ArrowUpRight, Menu, CheckCircle2, Globe, Users, 
   PlayCircle, BookOpen, Lightbulb, Scale, Sprout,
-  Search, Box, Clock, BarChart3
+  Search, Box, Clock, BarChart3, Play, Terminal, Settings
 } from 'lucide-react';
 import OmniCoreChat from './components/OmniCoreChat';
 import ESGHealthCheck from './components/ESGHealthCheck';
+import StudioMode from './components/StudioMode';
+import SwarmDashboard from './components/SwarmDashboard';
+import KnowledgeDashboard from './components/KnowledgeDashboard';
+import ExecutiveWarRoom from './components/ExecutiveWarRoom';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,6 +25,12 @@ export default function Home() {
   const [isAiOpen, setIsAiOpen] = useState(false);
 
   // --- Data Definitions ---
+  const architects = [
+    { name: 'Dr. Thoth', role: 'Founder / CEO', focus: 'Governance Logic' },
+    { name: 'DingJun', role: 'Co-founder / CSO', focus: '5T Architecture' },
+    { name: 'Kevin', role: 'Co-founder / COO', focus: 'Strategic Alliance' },
+    { name: 'Ares', role: 'Security Agent', focus: 'Hash Lock Auditing' }
+  ];
   const dimensions = [
     { n: '有形 Tangible', d: '如財務報表、資產設備，是企業生存的基礎實力。', icon: <Box className="w-6 h-6"/> },
     { n: '無形 Intangible', d: '品牌信譽、企業文化、研發專利與關鍵人才。', icon: <Users className="w-6 h-6"/> },
@@ -96,20 +106,20 @@ export default function Home() {
           <div className="flex items-center gap-4 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
             <div className="w-10 h-10 bg-wangdao-red rounded-full flex items-center justify-center text-white font-serif text-xl shadow-lg transition-all group-hover:scale-110">王</div>
             <div className="flex flex-col">
-              <span className="text-xl md:text-2xl font-display-calligraphy text-primary tracking-tighter">王道經營學堂</span>
+              <span className="text-xl md:text-2xl font-display-calligraphy text-primary tracking-tighter">ESG GO</span>
               <div className="hidden md:flex items-center gap-2 mt-0.5">
-                <span className="w-1 h-1 bg-green-500 rounded-full animate-pulse"></span>
-                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.2em]">5T Data Trust: Synchronized</span>
+                <span className="w-1 h-1 bg-cyan-core rounded-full animate-pulse"></span>
+                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.2em]">OmniCore v4.0: All-System Active</span>
               </div>
             </div>
           </div>
           
           <nav className="hidden lg:flex gap-10 items-center">
             {[
-              { id: 'philosophy', l: '王道理念' },
-              { id: 'courses', l: '課程體系' },
-              { id: 'insights', l: '最新洞察' },
-              { id: 'ai', l: 'AI專區' }
+              { id: 'philosophy', l: '5T 協議' },
+              { id: 'swarm', l: '代理集群' },
+              { id: 'knowledge', l: '全域知識' },
+              { id: 'ai', l: 'AI 治理' }
             ].map((item) => (
               <a 
                 key={item.id} 
@@ -394,6 +404,86 @@ export default function Home() {
            </div>
         </section>
 
+        {/* SECTION 8.5: Executive War Room (Active Monitoring) */}
+        <section id="war-room" className="py-24 bg-void-stark px-12 relative overflow-hidden">
+           <div className="max-w-7xl mx-auto">
+              <ExecutiveWarRoom />
+           </div>
+        </section>
+
+        {/* SECTION 8.6: Global Knowledge Dashboard */}
+        <section id="knowledge" className="py-24 bg-void-stark px-12 relative overflow-hidden">
+           <div className="max-w-7xl mx-auto">
+              <KnowledgeDashboard />
+           </div>
+        </section>
+
+        {/* SECTION 8.7: Architects Section (Unified Mindset) */}
+        <section id="architects" className="py-32 bg-white px-12 relative overflow-hidden border-y border-slate-100">
+           <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-20">
+                 <span className="text-wangdao-red font-bold text-[11px] tracking-[0.5em] mb-4 block uppercase">The Minds Behind ESG GO</span>
+                 <h2 className="font-serif text-5xl md:text-7xl text-primary tracking-tighter">18 人跨領域專家集群</h2>
+                 <p className="text-slate-500 mt-6 max-w-2xl mx-auto italic">全體同心，以技術級防禦守護全球供應鏈數據信託。</p>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                 {architects.map((a, i) => (
+                    <div key={i} className="p-8 border border-slate-100 rounded-2xl hover:border-wangdao-red/30 transition-all group">
+                       <div className="w-16 h-16 bg-slate-50 rounded-full mb-6 flex items-center justify-center text-primary font-bold text-xl group-hover:bg-wangdao-red group-hover:text-white transition-all">
+                          {a.name.charAt(0)}
+                       </div>
+                       <h4 className="text-xl font-serif text-primary mb-1">{a.name}</h4>
+                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">{a.role}</p>
+                       <div className="pt-4 border-t border-slate-50 text-[9px] text-slate-500 font-mono">
+                          FOCUS: {a.focus}
+                       </div>
+                    </div>
+                 ))}
+                 <div className="p-8 border border-dashed border-slate-200 rounded-2xl flex items-center justify-center text-slate-300 italic text-sm">
+                    +14 Specialists
+                 </div>
+              </div>
+           </div>
+        </section>
+
+        {/* SECTION 8.8: Universal Versatility (Univer CLI Integration) */}
+        <section id="versatility" className="py-24 bg-void-stark px-12 relative overflow-hidden">
+           <div className="max-w-7xl mx-auto">
+              <div className="p-12 rounded-3xl border border-white/5 bg-cyan-core/5 backdrop-blur-3xl flex flex-col md:flex-row items-center gap-12">
+                 <div className="flex-1">
+                    <span className="text-cyan-core font-bold text-[10px] tracking-[0.5em] mb-4 block uppercase">Universal Data Interop</span>
+                    <h2 className="font-serif text-4xl md:text-6xl text-white tracking-tighter mb-6">全能圓通：Univer 集成</h2>
+                    <p className="text-slate-400 text-lg font-light leading-relaxed mb-8">
+                       無縫對接 Univer CLI，實現 Excel 級數據流與 5T 信託協議的深度耦合。每一格數據，皆具備 SHA-256 完整性校驗。
+                    </p>
+                    <div className="flex gap-4">
+                       <button className="bg-cyan-core text-void-stark px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all">
+                          Launch Univer Viewer
+                       </button>
+                       <div className="flex items-center gap-2 text-[10px] text-slate-500 font-mono">
+                          <Terminal size={14} />
+                          unv inspect workbook hello.univer
+                       </div>
+                    </div>
+                 </div>
+                 <div className="w-full md:w-1/3 aspect-video bg-void-stark/80 rounded-2xl border border-white/10 p-4 font-mono text-[10px] text-cyan-core/70 overflow-hidden shadow-2xl">
+                    <div className="flex gap-2 mb-4 border-b border-white/5 pb-2">
+                       <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                       <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                       <div className="w-2 h-2 rounded-full bg-green-500/50" />
+                    </div>
+                    <div>$ univer status hello.univer</div>
+                    <div className="text-white mt-1">STATUS: SYNCED</div>
+                    <div className="text-slate-500 mt-1">HASH: 0x9f2e...d4c1</div>
+                    <div className="mt-4">$ univer inspect range &apos;A1:B10&apos;</div>
+                    <div className="text-slate-600 mt-1">| Category | Value |</div>
+                    <div className="text-slate-600">| -------- | ----- |</div>
+                    <div className="text-slate-600">| Carbon   | 420.5 |</div>
+                 </div>
+              </div>
+           </div>
+        </section>
+
         {/* SECTION 9: Seminar Registration (Lead Capture) */}
         <section id="enroll" className="py-40 bg-surface border-t border-outline-variant relative overflow-hidden">
            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-wangdao-red/20 to-transparent"></div>
@@ -530,19 +620,4 @@ export default function Home() {
     </div>
   );
 }
-font-family: 'Newsreader', serif;
-          font-size: 60vw;
-          color: #000;
-          opacity: 0.015;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          pointer-events: none;
-          z-index: 0;
-        }
-        
-        html { scroll-behavior: smooth; }
-      `}</style>
-    </div>
-  );
-}
+

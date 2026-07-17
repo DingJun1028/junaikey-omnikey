@@ -55,6 +55,16 @@ All data flows must pass through the **5T Logic Gate** to ensure mission-critica
 
 ---
 
+## 📜 OmniVault Document Traceability
+
+To ensure the "Traceable" dimension of the 5T Data Trust Framework, all significant internal documentation is cataloged with an OmniVault inscribed serial number.
+
+### Documents:
+
+*   **OMNISKILL_OPERATIONAL_GUIDELINES.md**: `OMNI-GUIDE-20260608-120000`
+
+---
+
 ## 🚀 Quick Start
 
 Three paths to deploy your Command Center:

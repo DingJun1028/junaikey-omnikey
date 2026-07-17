@@ -29,6 +29,20 @@ export class HermesAgent {
      */
     async dispatch(request: ApiRequest): Promise<ApiResponse> {
         const start = Date.now();
+
+        // 🛡️ Sealing Hook (5T Integrity Protocol)
+        // If the component is SEALED, block all execution to prevent race conditions.
+        if (process.env.OMNI_HERMES_STATUS === 'SEALED') {
+            console.warn(`[ISO-14064-1] Blocked: Attempted dispatch on SEALED component.`);
+            return {
+                id: request.id,
+                status: OmniResponseStatus.ERROR, // Use ERROR or a custom DENIED status if available
+                content: "DENIED: OmniHermes is currently SEALED by Architect Override.",
+                data: { trace: 'Traceable_Log_SEALED' },
+                latency: Date.now() - start
+            };
+        }
+
         const workerId = request.data?.workerId || 'swarm-default';
         const tmuxSession = `swarm-${workerId}`;
         

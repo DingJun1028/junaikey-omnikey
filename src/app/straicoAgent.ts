@@ -12,7 +12,7 @@ import { OpenCodeClient } from './clients/opencodeClient';
 export class StraicoAgent {
   private static API_KEY = process.env.STRAICO_API_KEY || "";
   private static opencode = new OpenCodeClient();
-  // ... rest of class ...
+  private static omnilog: Array<{ sigil: any; action: string; timestamp: number }> = [];
   
   // API 代理（擴充支援 OpenCode）
   static async proxyOpenCodeRequest(sigil: Sigil, payload: { prompt: string; model?: string }): Promise<any> {

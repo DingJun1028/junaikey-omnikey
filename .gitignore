@@ -63,6 +63,47 @@ firebase-debug.log
 .vs-kubernetes/
 .vscode-server-insiders/
 
+# SECRETS / CREDENTIALS — never commit (added for safety)
+.ssh/
+.aws/
+.azure/
+.oci/
+.boto
+.clasprc.json
+.l-hub-keys.json
+.firebaserc
+.firebase/
+.hermes/
+.cagent/
+.copilot/
+.continue/
+.crush.json
+.opencode.json
+.npmrc
+.gitlab/
+*_key
+*_key.pub
+ci_test_key*
+id_rsa*
+id_ed25519*
+*.pem
+
+# Personal / OS privacy
+Cookies/
+Application Data/
+"Local Settings/"
+"My Documents/"
+"Recent/"
+SendTo/
+"「開始」功能表"/
+.bash_history
+.bashrc
+.bash_profile
+.zshrc
+.lesshst
+.node_repl_history
+.v8flags*.json
+
 # Junk/Conflicts
 *.conflict
 utputFormat

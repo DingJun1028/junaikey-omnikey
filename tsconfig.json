@@ -17,6 +17,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
     "plugins": [
       {
         "name": "next"
@@ -25,11 +31,38 @@
   },
   "include": [
     "next-env.d.ts",
-    ".next/types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx"
+    "server/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "types/**/*.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".next",
+    "AppData",
+    "Downloads",
+    "OneDrive",
+    "iCloudDrive",
+    "iCloudPhotos",
+    "Documents",
+    "workspace",
+    "hermes-workspace",
+    "ai-integration-platform",
+    "ai-translation-ppt",
+    "blue-automation",
+    "claw3d",
+    "my-genkit-app",
+    "functions",
+    "coverage",
+    "dataconnect",
+    "esggo_docs",
+    "external_docs",
+    "wangdao_v3_dist",
+    "hello.univer",
+    "backup_files",
+    "src/app/wangdao/agentic-mvp-1778843111188.tsx",
+    "src/app/wangdao/agentic-mvp-1778843160042.tsx",
+    "src/app/wangdao/autonomous-mvp-1778838785430.tsx"
   ]
 }

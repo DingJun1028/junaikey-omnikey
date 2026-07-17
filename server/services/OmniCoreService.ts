@@ -1,7 +1,7 @@
-import { 
-    ApiRequest, 
-    ApiResponse, 
-    OmniResponseStatus, 
+import {
+    ApiRequest,
+    ApiResponse,
+    OmniResponseStatus,
     IComponentCore,
     IEvidence
 } from '../../src/omni/shared/types';

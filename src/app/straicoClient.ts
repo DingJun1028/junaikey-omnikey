@@ -16,7 +16,7 @@ export class StraicoClient {
   async getItems(): Promise<any[]> {
     const res = await fetch(this.getResourceUrl(), { headers: this.headers });
     if (!res.ok) throw new Error(`Get items failed: ${res.statusText}`);
-    const data = await res.json();
+    const data = await res.json() as { items?: any[] };
     return data.items || [];
   }
   async createItem(item: any): Promise<any> {
